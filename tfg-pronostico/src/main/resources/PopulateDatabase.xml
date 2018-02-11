@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- * PopulateDatabase.xml * * Copyright (C) 2017 Universidad de Sevilla 
+	* * The use of this project is hereby constrained to the conditions of the 
+	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+ ">
+
+	<!-- User accounts -->
+
+	<bean id="userAccount1" class="security.UserAccount">
+		<property name="username" value="admin" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="banned" value="false" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	
+
+	<!-- ADMIN -->
+
+	<bean id="admin1" class="domain.Administrator">
+		<property name="userAccount" ref="userAccount1" />
+		<property name="name" value="Juan Carlos" />
+		<property name="surname" value="López Muñoz" />
+		<property name="email" value="jualopmn2@gmail.com" />
+		<property name="phone" value="651181850" />
+	</bean>
+	
+	<bean id ="league1" class="domain.League">
+		<property name="leagueName" value="Primera Division"></property>
+		<property name="days">
+			<list>
+			<ref bean="jornada20"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id ="league2" class="domain.League">
+		<property name="leagueName" value="Segunda Division"></property>
+		<property name="days">
+			<list>
+			
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="jornada20" class="domain.Day">
+		<property name="num" value="23"></property>
+		<property name="matchesForecast">
+		<list></list>
+		</property>
+		<property name="matchesFinal">
+		<list></list>
+		
+		</property>
+	
+	</bean>
+	
+	
+	
+	
+	
+	
+</beans>
