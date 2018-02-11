@@ -18,4 +18,4 @@
 <hr />
 
 
-<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> Acme-Raffle Co., Inc.</b>
+<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> TFG-PRONOSTICO.</b>

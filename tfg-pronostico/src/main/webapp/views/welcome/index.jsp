@@ -17,9 +17,72 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<p><spring:message code="welcome.greeting.prefix" /> ${name}<spring:message code="welcome.greeting.suffix" /></p>
+
+<p><spring:message code="day.num" /> ${num}</p>
+
 
 <spring:message code="actor.save" var="actorSaveHeader"/>
 
+
+<spring:message code="message.matchForecast"/>
+<display:table  keepStatus="true" name="matchForecast"
+	requestURI="${requestURI}" id="row" class="table table-over">
+	
+	<spring:message code="matchForecast.local" var="local"/>
+	<display:column property="local" title="${local}"
+		sortable="false" />
+	
+	<spring:message code="matchForecast.resultLocal" var="resultLocal"/>		
+	<display:column property="resultLocal" title="${resultLocal}"
+		sortable="false" />
+	
+	<spring:message code="matchForecast.resultVisit" var="resultVisit"/>		
+	<display:column property="resultVisit" title="${resultVisit}"
+		sortable="false" />
+		
+	<spring:message code="matchForecast.visit" var="visit"/>
+	<display:column property="visit" title="${visit}"
+		sortable="false" />
+	
+	<spring:message code="matchForecast.actualization" var="actualization"/>
+	<display:column property="actualization" title="${actualization}"
+		sortable="false" />
+		
+	
+
+</display:table>
+
+<spring:message code="message.matchFinal"/>
+<display:table  keepStatus="true" name="matchFinal"
+	requestURI="${requestURI}" id="row" class="table table-over">
+	
+	<spring:message code="matchForecast.local" var="local"/>
+	<display:column property="local" title="${local}"
+		sortable="false" />
+	
+	<spring:message code="matchForecast.resultLocal" var="resultLocal"/>		
+	<display:column property="resultLocal" title="${resultLocal}"
+		sortable="false" />
+	
+	<spring:message code="matchForecast.resultVisit" var="resultVisit"/>		
+	<display:column property="resultVisit" title="${resultVisit}"
+		sortable="false" />
+		
+	<spring:message code="matchForecast.visit" var="visit"/>
+	<display:column property="visit" title="${visit}"
+		sortable="false" />
+	
+		
+	
+
+</display:table>
+
+
+
+
 <input onclick="window.location='welcome/cargar.do'" class="btn btn-warning" type="button" name="save" value="${actorSaveHeader}"/>
 <p><spring:message code="welcome.greeting.current.time" /> ${moment}</p> 
+
+
+
+

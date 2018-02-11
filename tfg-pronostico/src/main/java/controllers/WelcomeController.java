@@ -22,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 import domain.Actor;
 import security.LoginService;
 import services.CommentService;
+import services.DayService;
+import services.MatchFinalService;
 import services.MatchForecastService;
 
 @Controller
@@ -34,6 +36,10 @@ public class WelcomeController extends AbstractController {
 	private MatchForecastService	matchForecastService;
 	@Autowired
 	private CommentService			commentService;
+	@Autowired
+	private DayService				dayService;
+	@Autowired
+	private MatchFinalService		matchFinalService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -61,6 +67,9 @@ public class WelcomeController extends AbstractController {
 			result.addObject("name", name);
 
 		result.addObject("moment", moment);
+		result.addObject("matchForecast", dayService.ultimaJornada().getMatchesForecast());
+		result.addObject("matchFinal", dayService.ultimaJornada().getMatchesFinal());
+		result.addObject("num", dayService.ultimaJornada().getNum());
 
 		return result;
 	}
@@ -99,10 +108,12 @@ public class WelcomeController extends AbstractController {
 		try {
 			matchForecastService.guardarPartidos();
 			commentService.guardarComentarios();
+			matchFinalService.guardarResultadoFinal(dayService.ultimaJornada().getNum());
 			result = new ModelAndView("redirect:/");
 		} catch (final Throwable th) {
 			th.printStackTrace();
 		}
 		return result;
 	}
+
 }

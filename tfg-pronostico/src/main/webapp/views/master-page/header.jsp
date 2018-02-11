@@ -16,7 +16,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 <div>
-	<img src="images/logo.jpg" alt="Acme-Raffle Co., Inc." />
+	<img src="images/logo.png" alt="Acme-Raffle Co., Inc." />
 </div>
 
 

@@ -37,26 +37,56 @@ public class MatchFinalService {
 			Document d = Jsoup.connect("http://www.marcadoresonline.com/futbol/espa%C3%B1a/primeradivision/jornada" + num).timeout(600000).get();
 			Elements elem = d.select("div.contPartido.pdt_fin");
 			List<String> partidosAux = new ArrayList<>();
+			List<MatchFinal> partidosGuardados = matchFinalRepository.findAll();
+			for (MatchFinal a : partidosGuardados) {
+				partidosAux.add(a.getLocal());
+			}
 			Day day = dayService.ultimaJornada();
-			for (Element e : elem) {
-				MatchFinal matchFinal = new MatchFinal();
-				String partido = e.select("strong.equipo").text();
-				String resultado = e.select("span[id].numeroGoles").text();
-				String[] separarPartido = partido.split(" ");
-				String[] separarResultado = resultado.split(" ");
-				matchFinal.setLocal(separarPartido[0]);
+			if (!elem.isEmpty()) {
+				for (Element e : elem) {
+					MatchFinal matchFinal = new MatchFinal();
+					String partido = e.select("strong.equipo").text();
+					String resultado = e.select("span[id].numeroGoles").text();
 
-				matchFinal.setVisit(separarPartido[1]);
-				matchFinal.setResultLocal(Integer.parseInt(separarResultado[0]));
-				matchFinal.setResultVisit(Integer.parseInt(separarResultado[1]));
-				day.getMatchesFinal().add(matchFinal);
-				if (!partidosAux.contains(partidosAux))
-					dayService.save(day);
-				partidosAux.add(separarPartido[0]);
+					if (partido.contains("Depor")) {
+						partido = partido.replaceAll("Depor la Coruña", "Depor");
+					}
 
+					String[] separarPartido = partido.split(" ");
+					String[] separarResultado = resultado.split(" ");
+					matchFinal.setLocal(separarPartido[0]);
+
+					if (separarPartido[0].contains("Real") || separarPartido[0].contains("Athletic") || separarPartido[0].contains("Sociedad") || separarPartido[0].contains("Celta") || separarPartido[0].contains("Las")
+						|| separarPartido[0].contains("Levante")) {
+						matchFinal.setLocal(separarPartido[0] + " " + separarPartido[1]);
+						if (separarPartido[2].contains("Real") || separarPartido[2].contains("Levante") || separarPartido[2].contains("Athletic") || separarPartido[2].contains("Sociedad") || separarPartido[2].contains("Celta")
+							|| separarPartido[2].contains("Las")) {
+							matchFinal.setVisit(separarPartido[2] + " " + separarPartido[3]);
+						}
+
+					} else if (separarPartido[1].contains("Real") || separarPartido[1].contains("Levante") || separarPartido[1].contains("Athletic") || separarPartido[1].contains("Sociedad") || separarPartido[1].contains("Celta")
+						|| separarPartido[1].contains("Las")) {
+						matchFinal.setLocal(separarPartido[0]);
+						matchFinal.setVisit(separarPartido[1] + separarPartido[2]);
+					} else {
+						matchFinal.setLocal(separarPartido[0]);
+						matchFinal.setVisit(separarPartido[1]);
+					}
+
+					matchFinal.setResultLocal(Integer.parseInt(separarResultado[0]));
+					matchFinal.setResultVisit(Integer.parseInt(separarResultado[1]));
+					if (!partidosAux.contains(matchFinal.getLocal())) {
+						day.getMatchesFinal().add(matchFinal);
+
+						dayService.save(day);
+					}
+
+				}
 			}
 
-		} catch (IOException e) {
+		} catch (
+
+		IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
