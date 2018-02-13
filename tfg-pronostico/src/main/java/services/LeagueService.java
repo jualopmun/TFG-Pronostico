@@ -41,4 +41,8 @@ public class LeagueService {
 		return leagueRepository.exists(id);
 	}
 
+	public League getLeaguePrimeraDivision() {
+		return leagueRepository.getLeaguePrimeraDivision();
+	}
+
 }

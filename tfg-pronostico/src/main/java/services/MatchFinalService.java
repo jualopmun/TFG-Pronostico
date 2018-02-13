@@ -49,7 +49,7 @@ public class MatchFinalService {
 					String resultado = e.select("span[id].numeroGoles").text();
 
 					if (partido.contains("Depor")) {
-						partido = partido.replaceAll("Depor la Coruña", "Depor");
+						partido = partido.replaceAll("Depor La Coruña", "Depor");
 					}
 
 					String[] separarPartido = partido.split(" ");
@@ -62,6 +62,8 @@ public class MatchFinalService {
 						if (separarPartido[2].contains("Real") || separarPartido[2].contains("Levante") || separarPartido[2].contains("Athletic") || separarPartido[2].contains("Sociedad") || separarPartido[2].contains("Celta")
 							|| separarPartido[2].contains("Las")) {
 							matchFinal.setVisit(separarPartido[2] + " " + separarPartido[3]);
+						} else {
+							matchFinal.setVisit(separarPartido[2]);
 						}
 
 					} else if (separarPartido[1].contains("Real") || separarPartido[1].contains("Levante") || separarPartido[1].contains("Athletic") || separarPartido[1].contains("Sociedad") || separarPartido[1].contains("Celta")
@@ -84,9 +86,7 @@ public class MatchFinalService {
 				}
 			}
 
-		} catch (
-
-		IOException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

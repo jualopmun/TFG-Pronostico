@@ -5,7 +5,9 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
@@ -28,7 +30,7 @@ public class League extends DomainEntity {
 		this.leagueName = leagueName;
 	}
 	@NotNull
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	public Collection<Day> getDays() {
 		return days;
 	}

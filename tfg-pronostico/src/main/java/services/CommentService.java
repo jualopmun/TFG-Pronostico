@@ -120,6 +120,8 @@ public class CommentService {
 						matches.get(partido).getComments().add(comment);
 						matches.get(partido).setActualization(new Date());
 						matchForecastService.save(matches.get(partido));
+						commentcomp.add(comentario);
+						usercomp.add(usuario);
 						//user.setComments(comments);
 						//userService.save(user);
 

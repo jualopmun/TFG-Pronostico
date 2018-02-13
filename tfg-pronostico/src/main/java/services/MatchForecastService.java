@@ -67,19 +67,23 @@ public class MatchForecastService {
 			matchsaux.add(m.getLocal());
 		}
 
-		while (!dayService.existePartido()) {
-			matchFinalService.guardarResultadoFinal(dayService.ultimaJornada().getNum());
+		Integer dias = dayService.ultimaJornada().getNum();
+
+		while (!PruebaJsoup.comprobarPartido(dias)) {
+			//matchFinalService.guardarResultadoFinal(dayService.ultimaJornada().getNum());
+			day = new Day();
 			day.setNum(dayService.ultimaJornada().getNum() + 1);
 			day.setMatchesFinal(new ArrayList<MatchFinal>());
 			day.setMatchesForecast(new ArrayList<MatchForecast>());
-			dayService.save(day);
-			League league = leagueService.findAll().iterator().next();
+			//dayService.save(day);
+			League league = leagueService.findOne(8);
 			league.getDays().add(day);
 			leagueService.save(league);
+			dias++;
 
 		}
 
-		List<String> partidos = PruebaJsoup.getPartidos(day.getNum());
+		List<String> partidos = PruebaJsoup.getPartidos(dias);
 		for (String partido : partidos) {
 
 			String[] separar = partido.split("-vs-");
@@ -91,13 +95,14 @@ public class MatchForecastService {
 				matchForecast.setResultVisit(0);
 				matchForecast.setActualization(new Date());
 				matchForecast.setComments(new ArrayList<Comment>());
-
+				//dayService.save(day);
 				day.getMatchesForecast().add(matchForecast);
-				dayService.save(day);
+				matchForecastRepository.save(matchForecast);
 				matchsaux.add(separar[0]);
 
 			}
 		}
+
 	}
 
 	public MatchForecast saveAndFlush(MatchForecast entity) {

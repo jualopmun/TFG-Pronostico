@@ -7,6 +7,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
@@ -31,7 +32,7 @@ public class Day extends DomainEntity {
 	}
 
 	@NotNull
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	public Collection<MatchForecast> getMatchesForecast() {
 		return matchesForecast;
 	}
@@ -40,7 +41,7 @@ public class Day extends DomainEntity {
 		this.matchesForecast = matchesForecast;
 	}
 	@NotNull
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	public Collection<MatchFinal> getMatchesFinal() {
 		return matchesFinal;
 	}

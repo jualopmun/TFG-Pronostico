@@ -108,7 +108,7 @@ public class WelcomeController extends AbstractController {
 		try {
 			matchForecastService.guardarPartidos();
 			commentService.guardarComentarios();
-			matchFinalService.guardarResultadoFinal(dayService.ultimaJornada().getNum());
+			//matchFinalService.guardarResultadoFinal(dayService.ultimaJornada().getNum());
 			result = new ModelAndView("redirect:/");
 		} catch (final Throwable th) {
 			th.printStackTrace();

@@ -245,6 +245,24 @@ public class PruebaJsoup {
 
 	}
 
+	public static Boolean comprobarPartido(Integer num) {
+		Boolean hay = true;
+
+		try {
+			Document d = Jsoup.connect("http://www.marcadoresonline.com/futbol/espa%C3%B1a/primeradivision/jornada" + num).timeout(600000).get();
+			Elements elem = d.select("div.contPartido.pdt_pend");
+
+			if (elem.isEmpty()) {
+				hay = false;
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return hay;
+	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int num = 23;
