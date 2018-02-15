@@ -95,7 +95,7 @@ public class CommentService {
 
 					if (!commentcomp.contains(comentario) || !usercomp.contains(usuarioFinal)) {
 						User user = new User();
-						for (User a : userService.findAll()) {
+						for (User a : usersAux) {
 							if (a.getName().equals(usuarioFinal)) {
 								user = a;
 								break;
@@ -121,7 +121,7 @@ public class CommentService {
 						matches.get(partido).setActualization(new Date());
 						matchForecastService.save(matches.get(partido));
 						commentcomp.add(comentario);
-						usercomp.add(usuario);
+						usersAux.add(user);
 						//user.setComments(comments);
 						//userService.save(user);
 

@@ -18,19 +18,26 @@ public class PruebaJsoup {
 	public static List<String> listaDeForos(int num) {
 		List<String> foros = new ArrayList<String>();
 
+		Integer pagina = 0;
+		String lista = "http://www.apuestasdeportivas.com/foro/pronosticos-de-futbol-espanol/";
+
 		try {
-			Document d = Jsoup.connect("http://www.apuestasdeportivas.com/foro/pronosticos-de-futbol-espanol/").timeout(600000).get();
-			Elements elem = d.select("td.lastpost.windowbg2");
 
-			for (Element e : elem) {
-				for (String partidos : getJornadas(num)) {
-					String pag = e.select("a[href]").attr("href");
-					if (pag.contains(partidos)) {
+			while (pagina < 26) {
+				Document d = Jsoup.connect(lista).timeout(600000).get();
+				Elements elem = d.select("td.lastpost.windowbg2");
 
-						foros.add(pag);
+				for (Element e : elem) {
+					for (String partidos : getJornadas(num)) {
+						String pag = e.select("a[href]").attr("href");
+						if (pag.contains(partidos) && !foros.contains(pag)) {
+							foros.add(pag);
+						}
 					}
-				}
 
+				}
+				pagina += 25;
+				lista = lista + pagina;
 			}
 
 		} catch (IOException e) {
@@ -51,7 +58,9 @@ public class PruebaJsoup {
 
 			for (Element e : elem) {
 				for (String partidos : getJornadas(num)) {
+
 					String pag = e.select("a[href]").attr("href");
+
 					if (pag.contains(partidos)) {
 
 						foros.add(partidos);
@@ -178,7 +187,7 @@ public class PruebaJsoup {
 
 				if (partidos.get(i).contains("deportivocoruna")) {
 
-					String g = partidos.get(i).replace("deportivocoruna", "deportivo-coruna");
+					String g = partidos.get(i).replace("deportivocoruna", "deportivo-la-coruna");
 					partidos.remove(i);
 					partidos.add(g);
 
@@ -265,12 +274,14 @@ public class PruebaJsoup {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int num = 23;
+		int num = 24;
 		System.out.println("------------------jornada: " + num + "------------");
 		//getComentarios(listaDeForos(num));
 		//getComentarios(listaDeForos(num));
 		//getUsuarios(getComentarios(listaDeForos(num)));
-		getResultados(num);
+		//getResultados(num);
+		listaDeForos(num);
+		//getJornadas(num);
 
 	}
 
