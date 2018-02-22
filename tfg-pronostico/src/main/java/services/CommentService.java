@@ -84,8 +84,8 @@ public class CommentService {
 			for (String foros : PruebaJsoup.listaDeForos(dayService.ultimaJornada().getNum())) {
 
 				Document d = Jsoup.connect(foros).timeout(600000).get();
-				Elements elem = d.select("div.d.d-5");
-				Elements elem2 = d.select("div.usuario_pro.clearfix");
+				Elements elem = d.select("p.argumento");
+				Elements elem2 = d.select("div.nombre_usuario");
 				partido++;
 				for (int i = 0; i < elem.size(); i++) {
 
@@ -93,7 +93,7 @@ public class CommentService {
 					String usuarioFinal = usuario.replaceAll("Estadísticas del pronosticador Añadir pronosticador a favoritos", "");
 					String comentario = elem.get(i).text();
 
-					if (!commentcomp.contains(comentario) || !usercomp.contains(usuarioFinal)) {
+					if (!commentcomp.contains(comentario)) {
 						User user = new User();
 						for (User a : usersAux) {
 							if (a.getName().equals(usuarioFinal)) {
@@ -101,6 +101,7 @@ public class CommentService {
 								break;
 							}
 						}
+
 						user.setComments(new ArrayList<Comment>());
 						Comment comment = new Comment();
 
@@ -117,15 +118,15 @@ public class CommentService {
 						user.getComments().add(comment);
 						//comment.setUser(user);
 						//commentRepository.save(comment);
+
 						matches.get(partido).getComments().add(comment);
 						matches.get(partido).setActualization(new Date());
 						matchForecastService.save(matches.get(partido));
 						commentcomp.add(comentario);
 						usersAux.add(user);
-						//user.setComments(comments);
-						//userService.save(user);
-
 					}
+					//user.setComments(comments);
+					//userService.save(user);
 
 				}
 

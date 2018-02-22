@@ -11,6 +11,8 @@
 		<value>/views/misc/tiles.xml</value>
 		<value>/views/security/tiles.xml</value>
 		<value>/views/welcome/tiles.xml</value>
+		<value>/views/comment/tiles.xml</value>
+		
 
 
 	</util:list>

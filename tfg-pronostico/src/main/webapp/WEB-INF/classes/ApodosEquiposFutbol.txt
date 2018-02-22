@@ -1,0 +1,20 @@
+DeportivoAlaves->albiazules,babazorros,alaves,alavés,deportivo alaves,deportivo alavés,babazorros,el glorioso,glorioso,albiazules
+Villareal->villareal,submarino amarillo
+AthleticBilbao->athletic,athleti,bilbao,los cachorros,cachorros,ath.bilbao,los leones,leones,athletic del bilbao,athletic bilbao
+AtleticoMadrid->at.madrid,colchoneros,atletico,atleti,rojiblancos,indios,atletico de Madrid,atletico madrid
+Barcelona->culés,cules,barça,barcelonistas,fcb,blaugranas,azulgranas,barcelona
+Betis->beticos,béticos,verdiblancos,verderones,verdolagas,heliopolitanos,betis
+CeltaVigo->celta de vigo,celta,vigo,célticos,celtiñas,celestes,oliviricos,celta vigo
+DeportivoLaCoruña->deportivo,la coruña,coruña,depor,dépor,deportivistas,herculinos,superdépor,superdepor,deportivo la coruña,deportivo coruña
+Eibar->eibar,éibar,armeros
+Espanyol->español,espanyol,rcd espanyol,periquitos,pericos,españolistas,espanyolistas,blanquiazules,mágico,magico
+Getafe->getafe,getafe cf,azulones,geta,getafenses,azules,getafe team dubai
+Girona->girona,girona fc,blanquivermells,gironistas,albirrojos
+LasPalmas->palma,palmas,las palmas,ud palmas,ud las palmas,la unión deportiva las palmas,la union deportiva las palmas,la union,la ud,union,union deportiva
+Leganés->leganes,leganés,c.d. leganes, cd leganes,c.d leganés,cd leganés,pepineros
+Levante->levante,levante ud,granota,granotas
+Málaga->malaga,malaga fc,málaga,málaga fc,malaguistas,boquerones,blanquiazules,albiazules,albicelestes
+RealMadrid->merengues,madridistas,blancos,vikingos,real madrid,madrid
+RealSociedad->real sociedad,los txuri-urdin,txuri-urdin,xuri-urdinak, real,erreale
+Sevilla->sevilla,sevilla fc,sevillistas,palanganas,nervionenses,biris
+Valencia->valencia,valencia cf,los che,che

@@ -3,10 +3,13 @@ package domain;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
@@ -18,6 +21,9 @@ public class CommentProcess extends DomainEntity {
 
 
 	@NotBlank
+	@Lob
+	@Column(length = 100000)
+	@Type(type = "org.hibernate.type.StringClobType")
 	public String getCommentProcess() {
 		return commentProcess;
 	}
@@ -27,7 +33,7 @@ public class CommentProcess extends DomainEntity {
 	}
 
 	@NotNull
-	@OneToOne(optional = false)
+	@OneToOne
 	public Comment getComment() {
 		return comment;
 	}

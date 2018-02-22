@@ -14,7 +14,6 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.Type;
-import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -25,7 +24,6 @@ public class Comment extends DomainEntity {
 	private CommentProcess	commentProcess;
 
 
-	@NotBlank
 	@Lob
 	@Column(length = 100000)
 	@Type(type = "org.hibernate.type.StringClobType")
@@ -47,7 +45,8 @@ public class Comment extends DomainEntity {
 		this.user = user;
 	}
 
-	@OneToOne(mappedBy = "comment")
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@NotFound(action = NotFoundAction.IGNORE)
 	public CommentProcess getCommentProcess() {
 		return commentProcess;
 	}

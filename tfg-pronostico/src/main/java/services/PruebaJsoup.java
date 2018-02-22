@@ -23,7 +23,7 @@ public class PruebaJsoup {
 
 		try {
 
-			while (pagina < 26) {
+			while (pagina < 51) {
 				Document d = Jsoup.connect(lista).timeout(600000).get();
 				Elements elem = d.select("td.lastpost.windowbg2");
 
@@ -53,6 +53,7 @@ public class PruebaJsoup {
 		List<String> foros = new ArrayList<String>();
 
 		try {
+
 			Document d = Jsoup.connect("http://www.apuestasdeportivas.com/foro/pronosticos-de-futbol-espanol/").timeout(600000).get();
 			Elements elem = d.select("td.lastpost.windowbg2");
 
@@ -144,6 +145,7 @@ public class PruebaJsoup {
 		List<String> jornadas = new ArrayList<String>();
 		List<String> partidos = new ArrayList<String>();
 		List<String> fecha = new ArrayList<String>();
+		List<String> result = new ArrayList<String>();
 		try {
 			Document d = Jsoup.connect("http://www.marcadoresonline.com/futbol/espa%C3%B1a/primeradivision/jornada" + num).timeout(600000).get();
 
@@ -180,48 +182,43 @@ public class PruebaJsoup {
 				if (partidos.get(i).contains("athleticbilbao")) {
 
 					String g = partidos.get(i).replaceAll("athleticbilbao", "athletic-bilbao");
-					partidos.remove(i);
-					partidos.add(g);
+					result.add(g);
 
-				}
+				} else
 
 				if (partidos.get(i).contains("deportivocoruna")) {
 
 					String g = partidos.get(i).replace("deportivocoruna", "deportivo-la-coruna");
-					partidos.remove(i);
-					partidos.add(g);
+					result.add(g);
 
-				}
-				if (partidos.get(i).contains("realmadrid")) {
+				} else if (partidos.get(i).contains("realmadrid")) {
 
 					String g = partidos.get(i).replace("realmadrid", "real-madrid");
-					partidos.remove(i);
-					partidos.add(g);
-				}
-				if (partidos.get(i).contains("realsociedad")) {
+					result.add(g);
+
+				} else if (partidos.get(i).contains("realsociedad")) {
 
 					String g = partidos.get(i).replace("realsociedad", "real-sociedad");
-					partidos.remove(i);
-					partidos.add(g);
-				}
-				if (partidos.get(i).contains("atleticomadrid")) {
+					result.add(g);
+
+				} else if (partidos.get(i).contains("atleticomadrid")) {
 
 					String g = partidos.get(i).replace("atleticomadrid", "atletico-madrid");
-					partidos.remove(i);
-					partidos.add(g);
+					result.add(g);
 
-				}
-				if (partidos.get(i).contains("laspalmas")) {
+				} else if (partidos.get(i).contains("laspalmas")) {
 
 					String g = partidos.get(i).replace("laspalmas", "las-palmas");
-					partidos.remove(i);
-					partidos.add(g);
-				}
-				if (partidos.get(i).contains("celtavigo")) {
+					result.add(g);
+
+				} else if (partidos.get(i).contains("celtavigo")) {
 
 					String g = partidos.get(i).replace("celtavigo", "celta-vigo");
-					partidos.remove(i);
-					partidos.add(g);
+					result.add(g);
+
+				} else {
+					result.add(partidos.get(i));
+
 				}
 
 			}
@@ -231,7 +228,7 @@ public class PruebaJsoup {
 			e.printStackTrace();
 		}
 
-		return partidos;
+		return result;
 	}
 
 	//Recoger los resultados de la jornada
@@ -274,14 +271,14 @@ public class PruebaJsoup {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int num = 24;
+		int num = 25;
 		System.out.println("------------------jornada: " + num + "------------");
 		//getComentarios(listaDeForos(num));
 		//getComentarios(listaDeForos(num));
 		//getUsuarios(getComentarios(listaDeForos(num)));
 		//getResultados(num);
 		listaDeForos(num);
-		//getJornadas(num);
+		getJornadas(num);
 
 	}
 

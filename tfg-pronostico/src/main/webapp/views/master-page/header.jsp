@@ -29,6 +29,9 @@
 					<security:authorize access="isAnonymous()">
 						<li><a class="fNiv" href="security/login.do"><spring:message
 									code="master.page.login" /></a></li>
+									
+						<li><a class="fNiv" href="comment/list.do"><spring:message
+									code="master.page.comment" /></a></li>
 						<li class="dropdown">
 				          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><spring:message code="master.page.signup" /><span class="caret"></span></a>
 				          <ul class="dropdown-menu">

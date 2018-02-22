@@ -44,12 +44,12 @@ public class DayService {
 
 	//Metodos de ayuda
 	public Day ultimaJornada() {
-		return dayRepository.ultimaJornada();
+		return dayRepository.ultimaJornada().get(0);
 	}
 
 	public boolean existePartido() {
 		Boolean existe = true;
-		Day day = dayRepository.ultimaJornada();
+		Day day = dayRepository.ultimaJornada().get(0);
 		List<String> partidos = PruebaJsoup.getJornadas(day.getNum());
 		if (partidos.size() == 0) {
 			existe = false;

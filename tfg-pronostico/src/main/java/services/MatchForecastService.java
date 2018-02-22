@@ -70,12 +70,12 @@ public class MatchForecastService {
 		Integer dias = dayService.ultimaJornada().getNum();
 
 		while (!PruebaJsoup.comprobarPartido(dias)) {
-			//matchFinalService.guardarResultadoFinal(dayService.ultimaJornada().getNum());
+			matchFinalService.guardarResultadoFinal(dayService.ultimaJornada().getNum());
 			day = new Day();
 			day.setNum(dayService.ultimaJornada().getNum() + 1);
 			day.setMatchesFinal(new ArrayList<MatchFinal>());
 			day.setMatchesForecast(new ArrayList<MatchForecast>());
-			//dayService.save(day);
+			dayService.save(day);
 			League league = leagueService.findOne(8);
 			league.getDays().add(day);
 			leagueService.save(league);
@@ -84,9 +84,15 @@ public class MatchForecastService {
 		}
 
 		List<String> partidos = PruebaJsoup.getPartidos(dias);
+		for (String a : partidos) {
+			System.out.println(a);
+		}
+
+		int cont = 0;
 		for (String partido : partidos) {
 
 			String[] separar = partido.split("-vs-");
+
 			if (!matchsaux.contains(separar[0])) {
 				MatchForecast matchForecast = new MatchForecast();
 				matchForecast.setLocal(separar[0]);
@@ -95,13 +101,18 @@ public class MatchForecastService {
 				matchForecast.setResultVisit(0);
 				matchForecast.setActualization(new Date());
 				matchForecast.setComments(new ArrayList<Comment>());
-				//dayService.save(day);
+
 				day.getMatchesForecast().add(matchForecast);
-				matchForecastRepository.save(matchForecast);
-				matchsaux.add(separar[0]);
+				//matchForecastRepository.save(matchForecast);
+				dayService.save(day);
 
 			}
+			cont++;
+			matchsaux.add(separar[0]);
+
 		}
+
+		System.out.println(cont++);
 
 	}
 

@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import domain.Actor;
 import security.LoginService;
+import services.CommentProcessService;
 import services.CommentService;
 import services.DayService;
 import services.MatchFinalService;
@@ -40,6 +41,8 @@ public class WelcomeController extends AbstractController {
 	private DayService				dayService;
 	@Autowired
 	private MatchFinalService		matchFinalService;
+	@Autowired
+	private CommentProcessService	commentProcessService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -108,7 +111,7 @@ public class WelcomeController extends AbstractController {
 		try {
 			matchForecastService.guardarPartidos();
 			commentService.guardarComentarios();
-			//matchFinalService.guardarResultadoFinal(dayService.ultimaJornada().getNum());
+			commentProcessService.guardarComentariosProcesados();
 			result = new ModelAndView("redirect:/");
 		} catch (final Throwable th) {
 			th.printStackTrace();

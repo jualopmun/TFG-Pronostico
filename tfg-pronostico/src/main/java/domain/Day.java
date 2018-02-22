@@ -32,7 +32,7 @@ public class Day extends DomainEntity {
 	}
 
 	@NotNull
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL)
 	public Collection<MatchForecast> getMatchesForecast() {
 		return matchesForecast;
 	}
