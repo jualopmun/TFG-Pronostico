@@ -23,7 +23,7 @@ public class PruebaJsoup {
 
 		try {
 
-			while (pagina < 51) {
+			while (pagina < 120) {
 				Document d = Jsoup.connect(lista).timeout(600000).get();
 				Elements elem = d.select("td.lastpost.windowbg2");
 
@@ -147,83 +147,71 @@ public class PruebaJsoup {
 		List<String> fecha = new ArrayList<String>();
 		List<String> result = new ArrayList<String>();
 		try {
-			Document d = Jsoup.connect("http://www.marcadoresonline.com/futbol/espa%C3%B1a/primeradivision/jornada" + num).timeout(600000).get();
+			Document d = Jsoup.connect("http://www.marcadoresonline.com/futbol/españa/primeradivision/jornada" + num).timeout(600000).get();
 
 			Elements elem = d.select("div.contPartido.pdt_pend");
+			Elements elem2 = d.select("div.contPartido.pdt_fin");
+			Elements elem3 = d.select("div.contPartido.pdt_enjuego");
 			for (Element e : elem) {
 
-				jornadas.add(e.select("a[href]").attr("href"));
+				jornadas.add(e.select("a[href]").text());
 
 			}
-
-			Elements elem2 = d.select("span.fechaSeparador");
 			for (Element e : elem2) {
 
-				fecha.add(e.text());
+				jornadas.add(e.select("a[href]").text());
+
+			}
+			for (Element e : elem3) {
+
+				jornadas.add(e.select("a[href]").text());
 
 			}
 
 			for (String f : jornadas) {
-
-				for (String fec : fecha) {
-					//Primera pasada 
-					if (f.contains(fec)) {
-						String trans = f.replaceAll("/futbol/" + fec + "/", "");
-						String transf2 = trans.replaceAll("-", "-vs-");
-						partidos.add(transf2);
-
-					}
+				f = f.toLowerCase();
+				if (f.contains("athletic bilbao")) {
+					f = f.replaceAll("athletic bilbao", "athletic-bilbao");
 				}
+				if (f.contains("depor la coruña")) {
+					f = f.replaceAll("depor la coruña", "deportivo-la-coruna");
+				}
+				if (f.contains("real madrid")) {
+					f = f.replaceAll("real madrid", "real-madrid");
+				}
+				if (f.contains("levante u.d.")) {
+					f = f.replaceAll("levante u.d.", "levante");
+				}
+				if (f.contains("atletico madrid")) {
+					f = f.replaceAll("atletico madrid", "atletico-madrid");
+				}
+				if (f.contains("celta vigo")) {
+					f = f.replaceAll("celta vigo", "celta-vigo");
+				}
+				if (f.contains("las palmas")) {
+					f = f.replaceAll("las palmas", "las-palmas");
+				}
+				if (f.contains("athletic bilbao")) {
+					f = f.replaceAll("athletic bilbao", "athletic-bilbao");
+				}
+				if (f.contains("depor la coruña")) {
+					f = f.replaceAll("depor la coruña", "deportivo-la-coruna");
+				}
+				if (f.contains("real madrid")) {
+					f = f.replaceAll("real madrid", "real-madrid");
+				}
+				if (f.contains("betis")) {
+					f = f.replaceAll("betis", "real-betis");
+				}
+				f = f.replaceAll(" ", "-vs-");
+				result.add(f);
+				System.out.println(f);
 
 			}
 
-			for (int i = 0; i < partidos.size(); i++) {
+		} catch (
 
-				if (partidos.get(i).contains("athleticbilbao")) {
-
-					String g = partidos.get(i).replaceAll("athleticbilbao", "athletic-bilbao");
-					result.add(g);
-
-				} else
-
-				if (partidos.get(i).contains("deportivocoruna")) {
-
-					String g = partidos.get(i).replace("deportivocoruna", "deportivo-la-coruna");
-					result.add(g);
-
-				} else if (partidos.get(i).contains("realmadrid")) {
-
-					String g = partidos.get(i).replace("realmadrid", "real-madrid");
-					result.add(g);
-
-				} else if (partidos.get(i).contains("realsociedad")) {
-
-					String g = partidos.get(i).replace("realsociedad", "real-sociedad");
-					result.add(g);
-
-				} else if (partidos.get(i).contains("atleticomadrid")) {
-
-					String g = partidos.get(i).replace("atleticomadrid", "atletico-madrid");
-					result.add(g);
-
-				} else if (partidos.get(i).contains("laspalmas")) {
-
-					String g = partidos.get(i).replace("laspalmas", "las-palmas");
-					result.add(g);
-
-				} else if (partidos.get(i).contains("celtavigo")) {
-
-					String g = partidos.get(i).replace("celtavigo", "celta-vigo");
-					result.add(g);
-
-				} else {
-					result.add(partidos.get(i));
-
-				}
-
-			}
-
-		} catch (IOException e) {
+		IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -271,7 +259,7 @@ public class PruebaJsoup {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int num = 25;
+		int num = 27;
 		System.out.println("------------------jornada: " + num + "------------");
 		//getComentarios(listaDeForos(num));
 		//getComentarios(listaDeForos(num));

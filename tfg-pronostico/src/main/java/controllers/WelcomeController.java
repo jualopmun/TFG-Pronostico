@@ -109,9 +109,10 @@ public class WelcomeController extends AbstractController {
 		ModelAndView result = new ModelAndView("welcome/index");
 
 		try {
-			matchForecastService.guardarPartidos();
-			commentService.guardarComentarios();
-			commentProcessService.guardarComentariosProcesados();
+			//matchForecastService.guardarPartidos();
+			//commentService.guardarComentarios();
+			//commentProcessService.guardarComentariosProcesados();
+			matchFinalService.guardarResultadoFinal();
 			result = new ModelAndView("redirect:/");
 		} catch (final Throwable th) {
 			th.printStackTrace();

@@ -70,12 +70,12 @@ public class MatchForecastService {
 		Integer dias = dayService.ultimaJornada().getNum();
 
 		while (!PruebaJsoup.comprobarPartido(dias)) {
-			matchFinalService.guardarResultadoFinal(dayService.ultimaJornada().getNum());
+
 			day = new Day();
 			day.setNum(dayService.ultimaJornada().getNum() + 1);
 			day.setMatchesFinal(new ArrayList<MatchFinal>());
 			day.setMatchesForecast(new ArrayList<MatchForecast>());
-			dayService.save(day);
+			//dayService.save(day);
 			League league = leagueService.findOne(8);
 			league.getDays().add(day);
 			leagueService.save(league);

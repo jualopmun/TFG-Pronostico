@@ -84,7 +84,7 @@ public class CommentService {
 			for (String foros : PruebaJsoup.listaDeForos(dayService.ultimaJornada().getNum())) {
 
 				Document d = Jsoup.connect(foros).timeout(600000).get();
-				Elements elem = d.select("p.argumento");
+				Elements elem = d.select("div.parrafo");
 				Elements elem2 = d.select("div.nombre_usuario");
 				partido++;
 				for (int i = 0; i < elem.size(); i++) {
@@ -92,6 +92,7 @@ public class CommentService {
 					String usuario = elem2.get(i).text().replaceAll("Un pronóstico de: ", "");
 					String usuarioFinal = usuario.replaceAll("Estadísticas del pronosticador Añadir pronosticador a favoritos", "");
 					String comentario = elem.get(i).text();
+					comentario = remove1(comentario);
 
 					if (!commentcomp.contains(comentario)) {
 						User user = new User();
@@ -138,6 +139,20 @@ public class CommentService {
 		}
 
 	}
+
+	//codigo obtenido en:http://www.v3rgu1.com/blog/231/2010/programacion/eliminar-acentos-y-caracteres-especiales-en-java/
+	public static String remove1(String input) {
+		// Cadena de caracteres original a sustituir.
+		String original = "áàäéèëíìïóòöúùuñÁÀÄÉÈËÍÌÏÓÒÖÚÙÜÑçÇ";
+		// Cadena de caracteres ASCII que reemplazarán los originales.
+		String ascii = "aaaeeeiiiooouuunAAAEEEIIIOOOUUUNcC";
+		String output = input;
+		for (int i = 0; i < original.length(); i++) {
+			// Reemplazamos los caracteres especiales.
+			output = output.replace(original.charAt(i), ascii.charAt(i));
+		}//for i
+		return output;
+	}//remove1
 
 	public Comment saveAndFlush(Comment entity) {
 		return commentRepository.saveAndFlush(entity);
