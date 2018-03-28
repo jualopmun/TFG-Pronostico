@@ -157,10 +157,10 @@ public class PLNService {
 	}//remove1
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, TreeTaggerException {
-		String comentario = "vine vi vencir";
+		//String comentario = "vine vi vencir";
 		//eliminarStopWords(comentario);
 		//postaggin(comentario);
-		lematizar(comentario);
+		//lematizar(comentario);
 	}
 
 }
