@@ -4,13 +4,13 @@ package services;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 import org.annolab.tt4j.TreeTaggerException;
+import org.tartarus.snowball.ext.SpanishStemmer;
 
-import edu.stanford.nlp.ling.CoreAnnotations.LemmaAnnotation;
-import edu.stanford.nlp.ling.CoreAnnotations.NamedEntityTagAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.PartOfSpeechAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.TextAnnotation;
@@ -88,13 +88,19 @@ public class PLNService {
 		return result;
 	}
 
-	public static void postaggin(String comentario) {
+	//Nos interesa realizar una lista de contadores para procesarlo
+	//lista[Nombres,Verbos,Adjetivos]
+	public static List<Integer> postaggin(String comentario) {
 
 		Properties props = new Properties();
 		props.put("annotators", "tokenize, ssplit, pos, lemma, ner");
 		props.setProperty("tokenize.language", "es");
 		props.setProperty("pos.model", "edu/stanford/nlp/models/pos-tagger/spanish/spanish-distsim.tagger");
-		props.setProperty("ner.model", "edu/stanford/nlp/models/ner/spanish.ancora.distsim.s512.crf.ser.gz");
+		//props.setProperty("parse.model", "edu/stanford/nlp/models/lexparser/spanishPCFG.ser.gz");
+		List<Integer> res = new ArrayList<Integer>();
+		Integer NN = 0;
+		Integer VB = 0;
+		Integer ADJ = 0;
 		StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
 		Annotation document = new Annotation(comentario);
 
@@ -102,44 +108,55 @@ public class PLNService {
 		List<CoreMap> sentences = document.get(SentencesAnnotation.class);
 		for (CoreMap sentence : sentences) {
 			for (CoreLabel token : sentence.get(TokensAnnotation.class)) {
-				String word = token.get(TextAnnotation.class);
 				String pos = token.get(PartOfSpeechAnnotation.class);
+				String word = token.get(TextAnnotation.class);
+				if (pos.contains("nc") || pos.contains("np0")) {
+					NN++;
+				}
 
-				String ne = token.get(NamedEntityTagAnnotation.class);
+				if (pos.contains("va") || pos.contains("vm") || pos.contains("vs")) {
+					VB++;
+				}
+				if (pos.contains("ao") || pos.contains("aq")) {
+					ADJ++;
+				}
 
-				System.out.println("Lugar: " + word + " pos: " + pos + " ne:" + ne);
 			}
 
 		}
+		res.add(NN);
+		res.add(VB);
+		res.add(NN);
+
+		return res;
 	}
 
-	//lematizacion
-	public static void lematizar(String comentario) throws IOException, TreeTaggerException {
+	public List<String> stem(List<String> input) {
+		List<String> output = new ArrayList<>();
+		SpanishStemmer snowballStemmer = new SpanishStemmer();
+		for (String word : input) {
+			snowballStemmer.setCurrent(word);
+			snowballStemmer.stem();
+			output.add(snowballStemmer.getCurrent());
+			System.out.println(snowballStemmer.getCurrent());
+		}
+		return output;
+	}
 
-		Properties props = new Properties();
-		props.put("tokenize.language", "es");
-		props.put("annotators", "tokenize, ssplit, pos, lemma, ner, parse");
-		props.setProperty("pos.model", "edu/stanford/nlp/models/pos-tagger/spanish/spanish-distsim.tagger");
+	public static String lematizar(String palabra) {
 
-		props.put("ner.model", "edu/stanford/nlp/models/ner/spanish.ancora.distsim.s512.crf.ser.gz");
-		props.put("lemma.model", "/edu/stanford/nlp/models/srparser/spanishSR.beam.ser.gz");
+		SpanishStemmer spanish = new SpanishStemmer();
 
-		StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
-		Annotation document = new Annotation(comentario);
-
-		pipeline.annotate(document);
-		List<CoreMap> sentences = document.get(SentencesAnnotation.class);
-		for (CoreMap sentence : sentences) {
-			for (CoreLabel token : sentence.get(TokensAnnotation.class)) {
-				String word = token.get(TextAnnotation.class);
-				String pos = token.get(LemmaAnnotation.class);
-
-				String lemma = token.get(LemmaAnnotation.class);
-
-				System.out.println("Lugar: " + word + " pos: " + pos + " ne:" + lemma);
-			}
+		String[] tokens = palabra.split(" ");
+		String result = "";
+		for (String string : tokens) {
+			spanish.setCurrent(string);
+			spanish.stem();
+			String stemmed = spanish.getCurrent();
+			result += stemmed + " ";
 
 		}
+		return result;
 	}
 
 	//codigo obtenido en:http://www.v3rgu1.com/blog/231/2010/programacion/eliminar-acentos-y-caracteres-especiales-en-java/
@@ -156,11 +173,12 @@ public class PLNService {
 		return output;
 	}//remove1
 
+	//Probando algoritmo para sacar las palabras comunes en los comentarios
+
 	public static void main(String[] args) throws FileNotFoundException, IOException, TreeTaggerException {
-		//String comentario = "vine vi vencir";
-		//eliminarStopWords(comentario);
-		//postaggin(comentario);
-		//lematizar(comentario);
+
+		postaggin("Entramos a la victoria simple del Valladolid en la ida del play- off de ascenso a primera división.Mis motivos para este pick son claros: - gran temporada del Valladolid como local, de 21 partidos en casa, ha ganado 14 con sólo ");
+
 	}
 
 }

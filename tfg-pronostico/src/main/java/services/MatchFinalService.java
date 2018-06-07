@@ -107,4 +107,8 @@ public class MatchFinalService {
 		return matchFinalRepository.exists(id);
 	}
 
+	public MatchFinal partidoFinal(String partido) {
+		return matchFinalRepository.partidoFinal(partido);
+	}
+
 }

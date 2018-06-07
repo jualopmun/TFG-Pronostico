@@ -24,6 +24,7 @@
 		<security:intercept-url pattern="/" access="permitAll" />
 
 		<security:intercept-url access="permitAll" pattern="/welcome/cargar.do"/>
+		<security:intercept-url access="permitAll" pattern="/welcome/procesar.do"/>
 		<security:intercept-url access="permitAll" pattern="/comment/list.do"/>
 		
 	

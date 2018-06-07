@@ -1,0 +1,4 @@
+@RELATION PREDICCION 
+
+
+@ATTRIBUTE partidos {

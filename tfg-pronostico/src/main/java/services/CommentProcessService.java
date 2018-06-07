@@ -43,6 +43,7 @@ public class CommentProcessService {
 			String eliminar = eliminarStopWords(comentario);
 
 			String transformar = transformaPalabras(eliminar);
+			//String lematizar = PLNService.lematizar(transformar);
 
 			if (!aux.contains(eliminar)) {
 				CommentProcess commentProcess = new CommentProcess();
@@ -154,5 +155,18 @@ public class CommentProcessService {
 		}//for i
 		return output;
 	}//remove1
+
+	public List<String> comentariosProcesados(String equipo) {
+		if (commentProcessRepository.comentariosProcesados(equipo).size() < 3) {
+			return commentProcessRepository.comentariosProcesados(equipo);
+		} else {
+			return commentProcessRepository.comentariosProcesados(equipo).subList(0, 2);
+		}
+
+	}
+
+	public void flush() {
+		commentProcessRepository.flush();
+	}
 
 }

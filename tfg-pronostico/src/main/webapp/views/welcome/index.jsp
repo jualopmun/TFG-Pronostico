@@ -22,6 +22,8 @@
 
 
 <spring:message code="actor.save" var="actorSaveHeader"/>
+<spring:message code="actor.generar" var="generar"/>
+
 
 
 <spring:message code="message.matchForecast"/>
@@ -80,7 +82,9 @@
 
 
 
-<input onclick="window.location='welcome/cargar.do'" class="btn btn-warning" type="button" name="save" value="${actorSaveHeader}"/>
+<input onclick="window.location='welcome/cargar.do'" class="btn btn-warning" type="button" name="save" value="${actorSaveHeader}"/> 
+<input onclick="window.location='welcome/procesar.do'" class="btn btn-warning" type="button" name="Generar archivo Weka" value="${generar}"/>
+
 <p><spring:message code="welcome.greeting.current.time" /> ${moment}</p> 
 
 

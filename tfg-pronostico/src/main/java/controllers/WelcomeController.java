@@ -21,9 +21,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import domain.Actor;
 import security.LoginService;
+import services.AnalisisService;
 import services.CommentProcessService;
 import services.CommentService;
 import services.DayService;
+import services.GenerateArchiveArff;
 import services.MatchFinalService;
 import services.MatchForecastService;
 
@@ -43,6 +45,10 @@ public class WelcomeController extends AbstractController {
 	private MatchFinalService		matchFinalService;
 	@Autowired
 	private CommentProcessService	commentProcessService;
+	@Autowired
+	private GenerateArchiveArff		generateArchiveArff;
+	@Autowired
+	private AnalisisService			analisisService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -111,8 +117,25 @@ public class WelcomeController extends AbstractController {
 		try {
 			//matchForecastService.guardarPartidos();
 			//commentService.guardarComentarios();
-			//commentProcessService.guardarComentariosProcesados();
-			matchFinalService.guardarResultadoFinal();
+			commentProcessService.guardarComentariosProcesados();
+			//matchFinalService.guardarResultadoFinal();
+			result = new ModelAndView("redirect:/");
+		} catch (final Throwable th) {
+			th.printStackTrace();
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/procesar")
+	public ModelAndView procesarArchivoWeka() {
+		ModelAndView result = new ModelAndView("welcome/index");
+
+		try {
+			//matchForecastService.guardarPartidos();
+			//commentService.guardarComentarios();
+			generateArchiveArff.generarArchivoWeka();
+
+			//matchFinalService.guardarResultadoFinal();
 			result = new ModelAndView("redirect:/");
 		} catch (final Throwable th) {
 			th.printStackTrace();

@@ -120,4 +120,8 @@ public class MatchForecastService {
 		return matchForecastRepository.saveAndFlush(entity);
 	}
 
+	public void flush() {
+		matchForecastRepository.flush();
+	}
+
 }

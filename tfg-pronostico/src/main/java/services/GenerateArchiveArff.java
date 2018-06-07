@@ -1,77 +1,93 @@
 
 package services;
 
-import weka.classifiers.Classifier;
-import weka.classifiers.Evaluation;
-import weka.classifiers.bayes.NaiveBayes;
-import weka.core.Attribute;
-import weka.core.FastVector;
-import weka.core.Instance;
-import weka.core.Instances;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import domain.MatchForecast;
+
+@Service
 public class GenerateArchiveArff {
 
-	public static void generarArchivoWeka() throws Exception {
+	@Autowired
+	private MatchForecastService	matchForecastService;
 
-		// Declare two numeric attributes
-		Attribute Attribute1 = new Attribute("firstNumeric");
-		Attribute Attribute2 = new Attribute("secondNumeric");
+	@Autowired
+	private CommentProcessService	commentProccesService;
 
-		// Declare a nominal attribute along with its values
-		FastVector fvNominalVal = new FastVector(3);
-		fvNominalVal.addElement("blue");
-		fvNominalVal.addElement("gray");
-		fvNominalVal.addElement("black");
-		Attribute Attribute3 = new Attribute("aNominal", fvNominalVal);
+	@Autowired
+	private MatchFinalService		matchFinalService;
 
-		// Declare the class attribute along with its values
-		FastVector fvClassVal = new FastVector(2);
-		fvClassVal.addElement("positive");
-		fvClassVal.addElement("negative");
-		Attribute ClassAttribute = new Attribute("theClass", fvClassVal);
 
-		// Declare the feature vector
-		FastVector fvWekaAttributes = new FastVector(4);
-		fvWekaAttributes.addElement(Attribute1);
-		fvWekaAttributes.addElement(Attribute2);
-		fvWekaAttributes.addElement(Attribute3);
-		fvWekaAttributes.addElement(ClassAttribute);
+	public void generarArchivoWeka() throws Exception {
+		String ruta = "C:/Users/JuanCarlos/Desktop/informatica/2017-2018/TFG/Repositorio/TFG-Pronostico/Archivo weka/weka.arff";
+		File archivo = new File(ruta);
+		BufferedWriter bw = new BufferedWriter(new FileWriter(archivo));
 
-		// Create an empty training set
-		Instances isTrainingSet = new Instances("Rel", fvWekaAttributes, 10);
+		try {
 
-		// Set class index
-		isTrainingSet.setClassIndex(3);
+			//Entra a crear el archivo
+			bw.write("@RELATION PREDICCION \n\n");
+			bw.write("@ATTRIBUTE partidos {");
+			int cont = 1;
+			for (MatchForecast matches : matchForecastService.findAll()) {
+				if (cont == 9) {
+					bw.write(matches.getLocal() + "-vs-" + matches.getVisit() + "} \n");
+				} else {
+					bw.write(matches.getLocal() + "-vs-" + matches.getVisit() + ",");
+				}
 
-		// Create the instance
-		Instance iExample = null;
-		iExample.setValue((Attribute) fvWekaAttributes.elementAt(0), 1.0);
-		iExample.setValue((Attribute) fvWekaAttributes.elementAt(1), 0.5);
-		iExample.setValue((Attribute) fvWekaAttributes.elementAt(2), "gray");
-		iExample.setValue((Attribute) fvWekaAttributes.elementAt(3), "positive");
+				cont++;
 
-		// add the instance
-		isTrainingSet.add(iExample);
-		Classifier cModel = new NaiveBayes();
-		cModel.buildClassifier(isTrainingSet);
-
-		// Test the model
-		Evaluation eTest = new Evaluation(isTrainingSet);
-		eTest.evaluateModel(cModel, isTrainingSet);
-
-		// Print the result à la Weka explorer:
-		String strSummary = eTest.toSummaryString();
-		System.out.println(strSummary);
-
-		// Get the confusion matrix
-		double[][] cmMatrix = eTest.confusionMatrix();
-		for (int row_i = 0; row_i < cmMatrix.length; row_i++) {
-			for (int col_i = 0; col_i < cmMatrix.length; col_i++) {
-				System.out.print(cmMatrix[row_i][col_i]);
-				System.out.print("|");
 			}
-			System.out.println();
+
+			bw.write("@ATTRIBUTE NN real \n");
+			bw.write("@ATTRIBUTE VB real \n");
+			bw.write("@ATTRIBUTE ADJ real \n");
+			bw.write("@ATTRIBUTE resultado {1,x,2} \n\n");
+
+			bw.write("@data \n");
+
+			String resultado = null;
+			List<Integer> lematizar = new ArrayList<Integer>();
+			for (MatchForecast matches : matchForecastService.findAll()) {
+
+				if (matches.getResultLocal() > matches.getResultVisit()) {
+					resultado = "1";
+				}
+				if (matches.getResultLocal() == matches.getResultVisit()) {
+					resultado = "x";
+				}
+
+				if (matches.getResultLocal() < matches.getResultVisit()) {
+					resultado = "2";
+				}
+
+				for (String a : commentProccesService.comentariosProcesados(matches.getLocal())) {
+
+					lematizar = PLNService.postaggin(a);
+
+				}
+
+				commentProccesService.flush();
+				if (!lematizar.isEmpty())
+					bw.write(matches.getLocal() + "-vs-" + matches.getVisit() + "," + lematizar.get(0) + "," + lematizar.get(1) + "," + lematizar.get(2) + "," + resultado + "\n");
+				lematizar = new ArrayList<Integer>();
+			}
+
+		} catch (
+
+		Exception e) {
+			e.printStackTrace();
 		}
+		bw.close();
+
 	}
 
 }
