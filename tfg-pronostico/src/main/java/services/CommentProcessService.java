@@ -160,7 +160,7 @@ public class CommentProcessService {
 		if (commentProcessRepository.comentariosProcesados(equipo).size() < 3) {
 			return commentProcessRepository.comentariosProcesados(equipo);
 		} else {
-			return commentProcessRepository.comentariosProcesados(equipo).subList(0, 2);
+			return commentProcessRepository.comentariosProcesados(equipo).subList(0, 3);
 		}
 
 	}

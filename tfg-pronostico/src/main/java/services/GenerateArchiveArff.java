@@ -26,7 +26,7 @@ public class GenerateArchiveArff {
 
 
 	public void generarArchivoWeka() throws Exception {
-		String ruta = "C:/Users/JuanCarlos/Desktop/informatica/2017-2018/TFG/Repositorio/TFG-Pronostico/Archivo weka/weka.arff";
+		String ruta = "C:/Users/karli/Desktop/Informatica/TFG/Repositorio/TFG-Pronostico/Archivo weka/weka.arff";
 		File archivo = new File(ruta);
 		BufferedWriter bw = new BufferedWriter(new FileWriter(archivo));
 
@@ -35,15 +35,15 @@ public class GenerateArchiveArff {
 			//Entra a crear el archivo
 			bw.write("@RELATION PREDICCION \n\n");
 			bw.write("@ATTRIBUTE partidos {");
-			int cont = 1;
-			for (MatchForecast matches : matchForecastService.findAll()) {
-				if (cont == 9) {
-					bw.write(matches.getLocal() + "-vs-" + matches.getVisit() + "} \n");
+			
+			//for (MatchForecast matches : matchForecastService.findAll()) {
+			for(int i=0;i<matchForecastService.findAll().size(); i++) {
+				if (i==matchForecastService.findAll().size()-1) {
+					bw.write(matchForecastService.findAll().get(i).getLocal() + "-vs-" + matchForecastService.findAll().get(i).getVisit() + "} \n");
 				} else {
-					bw.write(matches.getLocal() + "-vs-" + matches.getVisit() + ",");
+					bw.write(matchForecastService.findAll().get(i).getLocal() + "-vs-" + matchForecastService.findAll().get(i).getVisit() + ",");
 				}
 
-				cont++;
 
 			}
 
@@ -55,7 +55,7 @@ public class GenerateArchiveArff {
 			bw.write("@data \n");
 
 			String resultado = null;
-			List<Integer> lematizar = new ArrayList<Integer>();
+			List<Float> lematizar = new ArrayList<Float>();
 			for (MatchForecast matches : matchForecastService.findAll()) {
 
 				if (matches.getResultLocal() > matches.getResultVisit()) {
@@ -72,13 +72,14 @@ public class GenerateArchiveArff {
 				for (String a : commentProccesService.comentariosProcesados(matches.getLocal())) {
 
 					lematizar = PLNService.postaggin(a);
+					if (!lematizar.isEmpty())
+						bw.write(matches.getLocal() + "-vs-" + matches.getVisit() + "," + lematizar.get(0) + "," + lematizar.get(1) + "," + lematizar.get(2) + "," + resultado + "\n");
+					lematizar = new ArrayList<Float>();
 
 				}
 
 				commentProccesService.flush();
-				if (!lematizar.isEmpty())
-					bw.write(matches.getLocal() + "-vs-" + matches.getVisit() + "," + lematizar.get(0) + "," + lematizar.get(1) + "," + lematizar.get(2) + "," + resultado + "\n");
-				lematizar = new ArrayList<Integer>();
+				
 			}
 
 		} catch (

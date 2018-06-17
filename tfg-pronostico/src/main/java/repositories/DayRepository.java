@@ -11,7 +11,7 @@ import domain.Day;
 public interface DayRepository extends JpaRepository<Day, Integer> {
 
 	//Buscamos la ultima jornada para la busqueda de partidos
-	@Query("select distinct a from Day a where a.num=(select max(b.num) from Day b )")
+	@Query("select distinct a from Day a where a.num=27")
 	List<Day> ultimaJornada();
 
 }

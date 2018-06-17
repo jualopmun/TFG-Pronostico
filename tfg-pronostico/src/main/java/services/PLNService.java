@@ -90,17 +90,18 @@ public class PLNService {
 
 	//Nos interesa realizar una lista de contadores para procesarlo
 	//lista[Nombres,Verbos,Adjetivos]
-	public static List<Integer> postaggin(String comentario) {
+	public static List<Float> postaggin(String comentario) {
 
 		Properties props = new Properties();
 		props.put("annotators", "tokenize, ssplit, pos, lemma, ner");
 		props.setProperty("tokenize.language", "es");
 		props.setProperty("pos.model", "edu/stanford/nlp/models/pos-tagger/spanish/spanish-distsim.tagger");
 		//props.setProperty("parse.model", "edu/stanford/nlp/models/lexparser/spanishPCFG.ser.gz");
-		List<Integer> res = new ArrayList<Integer>();
-		Integer NN = 0;
-		Integer VB = 0;
-		Integer ADJ = 0;
+		List<Float> res = new ArrayList<Float>();
+		float NN = 0;
+		float VB = 0;
+		float ADJ = 0;
+		float contPal = 0;
 		StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
 		Annotation document = new Annotation(comentario);
 
@@ -120,13 +121,19 @@ public class PLNService {
 				if (pos.contains("ao") || pos.contains("aq")) {
 					ADJ++;
 				}
+				contPal++;
 
 			}
 
 		}
-		res.add(NN);
-		res.add(VB);
-		res.add(NN);
+		float fNN=(float) (NN/contPal);
+		float fVB=(float) (VB/contPal);
+		float fADJ=(float) (ADJ/contPal);
+		System.out.println(ADJ);
+		System.out.println(fNN);
+		res.add(fNN);
+		res.add(fVB);
+		res.add(fADJ);
 
 		return res;
 	}

@@ -1,0 +1,29 @@
+@RELATION PREDICCION 
+
+@ATTRIBUTE partidos {real-madrid-vs-alaves,athletic-bilbao-vs-malaga,valencia-vs-real-sociedad,villarreal-vs-getafe,barcelona-vs-girona,sevilla-vs-atletico-madrid,deportivo-la-coruna-vs-espanyol,leganes-vs-las-palmas,celta-vigo-vs-eibar,levante-vs-real-betis,girona-vs-celta-vigo,girona-vs-celta-vigo,malaga-vs-sevilla,girona-vs-celta-vigo,malaga-vs-sevilla,espanyol-vs-real-madrid,girona-vs-celta-vigo,malaga-vs-sevilla,espanyol-vs-real-madrid,las-palmas-vs-barcelona,girona-vs-celta-vigo,malaga-vs-sevilla,espanyol-vs-real-madrid,las-palmas-vs-barcelona,getafe-vs-deportivo-la-coruna,girona-vs-celta-vigo,malaga-vs-sevilla,espanyol-vs-real-madrid,las-palmas-vs-barcelona,getafe-vs-deportivo-la-coruna,betis-vs-real-sociedad,girona-vs-celta-vigo,malaga-vs-sevilla,espanyol-vs-real-madrid,las-palmas-vs-barcelona,getafe-vs-deportivo-la-coruna,betis-vs-real-sociedad,alaves-vs-levante,girona-vs-celta-vigo,malaga-vs-sevilla,espanyol-vs-real-madrid,las-palmas-vs-barcelona,getafe-vs-deportivo-la-coruna,betis-vs-real-sociedad,alaves-vs-levante,atletico-madrid-vs-leganes,eibar-vs-villarreal,real-sociedad-vs-alaves} 
+@ATTRIBUTE NN real 
+@ATTRIBUTE VB real 
+@ATTRIBUTE ADJ real 
+@ATTRIBUTE resultado {1,x,2} 
+
+@data 
+real-madrid-vs-alaves,0.36725664,0.22566372,0.17256637,1
+real-madrid-vs-alaves,0.41326532,0.19897959,0.15306123,1
+real-madrid-vs-alaves,0.525,0.05,0.15,1
+athletic-bilbao-vs-malaga,0.36190477,0.31428573,0.123809524,1
+valencia-vs-real-sociedad,0.46666667,0.20952381,0.21904762,1
+valencia-vs-real-sociedad,0.47413793,0.19827586,0.20689656,1
+valencia-vs-real-sociedad,0.3846154,0.16923077,0.15384616,1
+villarreal-vs-getafe,0.43564355,0.26732674,0.14851485,1
+barcelona-vs-girona,0.40350878,0.2631579,0.1754386,1
+barcelona-vs-girona,0.4027778,0.1875,0.2013889,1
+barcelona-vs-girona,0.31756756,0.1418919,0.0945946,1
+sevilla-vs-atletico-madrid,0.4329897,0.19587629,0.14432989,2
+sevilla-vs-atletico-madrid,0.45528457,0.25203252,0.15447155,2
+deportivo-la-coruna-vs-espanyol,0.37623763,0.2970297,0.16831683,x
+deportivo-la-coruna-vs-espanyol,0.4019608,0.15686275,0.16666667,x
+leganes-vs-las-palmas,0.3899371,0.1572327,0.13207547,x
+leganes-vs-las-palmas,0.3529412,0.27941176,0.14705883,x
+celta-vigo-vs-eibar,0.36206895,0.29310346,0.1724138,1
+celta-vigo-vs-eibar,0.3899371,0.21383648,0.1572327,1
+celta-vigo-vs-eibar,0.39344263,0.18032786,0.19672132,1
