@@ -1,0 +1,37 @@
+@RELATION PREDICCION 
+
+@ATTRIBUTE local {real-madrid,barcelona,sevilla,levante,deportivo-la-coruna,celta-vigo,leganes,valencia,villarreal,alaves,getafe,real-sociedad,malaga,girona,atletico-madrid,espanyol,las-palmas,eibar,athletic-bilbao,real-betis}
+@ATTRIBUTE visitante{real-madrid,barcelona,sevilla,levante,deportivo-la-coruna,leganes,celta-vigo,valencia,alaves,villarreal,getafe,real-sociedad,malaga,girona,atletico-madrid,espanyol,las-palmas,eibar,athletic-bilbao,real-betis} 
+@ATTRIBUTE NN real 
+@ATTRIBUTE VB real 
+@ATTRIBUTE ADJ real 
+@ATTRIBUTE resultado {1,x,2} 
+
+@data 
+real-sociedad,levante,0.47668394,0.119170986,0.19689119,1
+real-sociedad,levante,0.36065573,0.25409836,0.17213115,1
+real-sociedad,levante,0.42753622,0.2536232,0.1594203,1
+atletico-madrid,athletic-bilbao,0.32222223,0.25555557,0.13333334,1
+atletico-madrid,athletic-bilbao,0.33673468,0.35714287,0.13265306,1
+atletico-madrid,athletic-bilbao,0.53424656,0.23287672,0.10958904,1
+espanyol,villarreal,0.48101267,0.2278481,0.1392405,x
+espanyol,villarreal,0.39869282,0.08496732,0.20261438,x
+espanyol,villarreal,0.37313432,0.20895523,0.23880596,x
+real-betis,real-madrid,0.4654088,0.1572327,0.17610063,2
+real-betis,real-madrid,0.48076922,0.32692307,0.07692308,2
+real-betis,real-madrid,0.40350878,0.33333334,0.1754386,2
+las-palmas,sevilla,0.37967914,0.19251336,0.21925133,2
+las-palmas,sevilla,0.39175257,0.2783505,0.17525773,2
+las-palmas,sevilla,0.43283582,0.26865673,0.2238806,2
+eibar,barcelona,0.7647059,0.10294118,0.073529415,2
+eibar,barcelona,0.421875,0.234375,0.18229167,2
+eibar,barcelona,0.41,0.23,0.14,2
+alaves,deportivo-la-coruna,0.38053098,0.24778761,0.14159292,1
+alaves,deportivo-la-coruna,0.42028984,0.13043478,0.2173913,1
+alaves,deportivo-la-coruna,0.46231157,0.17085427,0.09045226,1
+malaga,valencia,0.44375,0.1375,0.15625,2
+malaga,valencia,0.37078652,0.21348314,0.23595506,2
+malaga,valencia,0.3275862,0.25862068,0.2413793,2
+girona,leganes,0.3119266,0.123853214,0.1146789,1
+girona,leganes,0.42201835,0.20183486,0.16513762,1
+girona,leganes,0.36645964,0.1552795,0.2173913,1

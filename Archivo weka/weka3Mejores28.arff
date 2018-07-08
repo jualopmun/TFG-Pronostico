@@ -1,0 +1,40 @@
+@RELATION PREDICCION 
+
+@ATTRIBUTE local {real-madrid,barcelona,sevilla,levante,deportivo-la-coruna,celta-vigo,leganes,valencia,villarreal,alaves,getafe,real-sociedad,malaga,girona,atletico-madrid,espanyol,las-palmas,eibar,athletic-bilbao,real-betis}
+@ATTRIBUTE visitante{real-madrid,barcelona,sevilla,levante,deportivo-la-coruna,leganes,celta-vigo,valencia,alaves,villarreal,getafe,real-sociedad,malaga,girona,atletico-madrid,espanyol,las-palmas,eibar,athletic-bilbao,real-betis} 
+@ATTRIBUTE NN real 
+@ATTRIBUTE VB real 
+@ATTRIBUTE ADJ real 
+@ATTRIBUTE resultado {1,x,2} 
+
+@data 
+alaves,real-betis,0.4,0.2,0.1,2
+alaves,real-betis,0.39473686,0.2631579,0.10526316,2
+alaves,real-betis,0.3939394,0.21212122,0.121212125,2
+espanyol,real,0.42982456,0.19298245,0.18421052,1
+espanyol,real,0.43965518,0.22413793,0.112068966,1
+espanyol,real,0.47663552,0.1682243,0.17757009,1
+atletico-madrid,celta-vigo,0.352518,0.30935252,0.11510792,1
+atletico-madrid,celta-vigo,0.42857143,0.20779221,0.24675325,1
+atletico-madrid,celta-vigo,0.38202247,0.24719101,0.19101124,1
+las-palmas,villarreal,0.44680852,0.29787233,0.12765957,2
+las-palmas,villarreal,0.3809524,0.29761904,0.14285715,2
+las-palmas,villarreal,0.4,0.34736842,0.10526316,2
+athletic-bilbao,leganes,0.3846154,0.15384616,0.30769232,1
+athletic-bilbao,leganes,0.3125,0.2734375,0.1796875,1
+athletic-bilbao,leganes,0.42857143,0.26785713,0.17857143,1
+eibar,real-madrid,0.4107143,0.19642857,0.16071428,2
+eibar,real-madrid,0.35135135,0.3783784,0.24324325,2
+eibar,real-madrid,0.35403726,0.33540374,0.18012422,2
+sevilla,valencia,0.34285715,0.25714287,0.22857143,2
+sevilla,valencia,0.39,0.19333333,0.12,2
+sevilla,valencia,0.4888889,0.083333336,0.05,2
+getafe,levante,0.4347826,0.2173913,0.17391305,2
+getafe,levante,0.33333334,0.21568628,0.3137255,2
+getafe,levante,0.47008547,0.1965812,0.17948718,2
+malaga,barcelona,0.3298969,0.15463917,0.24742268,2
+malaga,barcelona,0.37575758,0.23636363,0.15151516,2
+malaga,barcelona,0.42647058,0.23529412,0.20588236,2
+girona,deportivo-la-coruna,0.36206895,0.22413793,0.1724138,1
+girona,deportivo-la-coruna,0.38418078,0.073446326,0.06214689,1
+girona,deportivo-la-coruna,0.4090909,0.09090909,0.20454545,1

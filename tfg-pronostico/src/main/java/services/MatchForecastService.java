@@ -60,30 +60,31 @@ public class MatchForecastService {
 	}
 
 	public void guardarPartidos() {
-		Day day = dayService.ultimaJornada();
+		Day day = dayService.findAll().iterator().next();
 		List<MatchForecast> matchs = matchForecastRepository.findAll();
 		List<String> matchsaux = new ArrayList<String>();
 		for (MatchForecast m : matchs) {
 			matchsaux.add(m.getLocal());
 		}
 
-		Integer dias = dayService.ultimaJornada().getNum();
+		//Integer dias = dayService.ultimaJornada().getNum();
+		//Integer dias= dayService.findAll().iterator().next().getNum();
 
-		while (!PruebaJsoup.comprobarPartido(dias)) {
+//		while (!PruebaJsoup.comprobarPartido(dias)) {
+//
+//			day = new Day();
+//			day.setNum(dayService.ultimaJornada().getNum() + 1);
+//			day.setMatchesFinal(new ArrayList<MatchFinal>());
+//			day.setMatchesForecast(new ArrayList<MatchForecast>());
+//			//dayService.save(day);
+//			League league = leagueService.findOne(8);
+//			league.getDays().add(day);
+//			leagueService.save(league);
+//			dias++;
+//
+//		}
 
-			day = new Day();
-			day.setNum(dayService.ultimaJornada().getNum() + 1);
-			day.setMatchesFinal(new ArrayList<MatchFinal>());
-			day.setMatchesForecast(new ArrayList<MatchForecast>());
-			//dayService.save(day);
-			League league = leagueService.findOne(8);
-			league.getDays().add(day);
-			leagueService.save(league);
-			dias++;
-
-		}
-
-		List<String> partidos = PruebaJsoup.getPartidos(dias);
+		List<String> partidos = PruebaJsoup.getJornadas(day.getNum());
 		for (String a : partidos) {
 			System.out.println(a);
 		}
@@ -92,13 +93,15 @@ public class MatchForecastService {
 		for (String partido : partidos) {
 
 			String[] separar = partido.split("-vs-");
-
+			
 			if (!matchsaux.contains(separar[0])) {
+				String resultado= PruebaJsoup.getResultados(day.getNum()).get(cont);
+				String [] separar_resultado=resultado.split(" ");
 				MatchForecast matchForecast = new MatchForecast();
 				matchForecast.setLocal(separar[0]);
 				matchForecast.setVisit(separar[1]);
-				matchForecast.setResultLocal(0);
-				matchForecast.setResultVisit(0);
+				matchForecast.setResultLocal(Integer.parseInt(separar_resultado[0]));
+				matchForecast.setResultVisit(Integer.parseInt(separar_resultado[1]));
 				matchForecast.setActualization(new Date());
 				matchForecast.setComments(new ArrayList<Comment>());
 

@@ -164,6 +164,11 @@ public class CommentProcessService {
 		}
 
 	}
+	
+	public List<String> comentariosProcesados2(String equipo) {
+		
+		return commentProcessRepository.comentariosProcesados(equipo);
+	}
 
 	public void flush() {
 		commentProcessRepository.flush();

@@ -205,7 +205,6 @@ public class PruebaJsoup {
 				}
 				f = f.replaceAll(" ", "-vs-");
 				result.add(f);
-				System.out.println(f);
 
 			}
 
@@ -220,22 +219,24 @@ public class PruebaJsoup {
 	}
 
 	//Recoger los resultados de la jornada
-	public static void getResultados(int num) {
-
+	public static List<String> getResultados(int num) {
+		
+		List<String> res= new ArrayList<String>();
 		try {
 			Document d = Jsoup.connect("http://www.marcadoresonline.com/futbol/espa%C3%B1a/primeradivision/jornada" + num).timeout(600000).get();
 			Elements elem = d.select("div.contPartido.pdt_fin");
 			for (Element e : elem) {
-
+				String a=e.select("span[id].numeroGoles").text();
 				System.out.println(e.select("strong.equipo").text());
 				System.out.println(e.select("span[id].numeroGoles").text());
-
+				res.add(a);
 			}
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return res;
 
 	}
 
@@ -259,14 +260,14 @@ public class PruebaJsoup {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int num = 27;
+		int num = 19;
 		System.out.println("------------------jornada: " + num + "------------");
 		//getComentarios(listaDeForos(num));
 		//getComentarios(listaDeForos(num));
 		//getUsuarios(getComentarios(listaDeForos(num)));
 		//getResultados(num);
-		listaDeForos(num);
-		getJornadas(num);
+		//listaDeForos(num);
+		getResultados(num);
 
 	}
 

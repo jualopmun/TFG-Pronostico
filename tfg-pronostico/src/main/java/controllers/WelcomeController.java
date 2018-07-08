@@ -76,9 +76,9 @@ public class WelcomeController extends AbstractController {
 			result.addObject("name", name);
 
 		result.addObject("moment", moment);
-		result.addObject("matchForecast", dayService.ultimaJornada().getMatchesForecast());
-		result.addObject("matchFinal", dayService.ultimaJornada().getMatchesFinal());
-		result.addObject("num", dayService.ultimaJornada().getNum());
+//		result.addObject("matchForecast", dayService.ultimaJornada().getMatchesForecast());
+//		result.addObject("matchFinal", dayService.ultimaJornada().getMatchesFinal());
+//		result.addObject("num", dayService.ultimaJornada().getNum());
 
 		return result;
 	}
@@ -115,8 +115,8 @@ public class WelcomeController extends AbstractController {
 		ModelAndView result = new ModelAndView("welcome/index");
 
 		try {
-			//matchForecastService.guardarPartidos();
-			//commentService.guardarComentarios();
+			matchForecastService.guardarPartidos();
+			commentService.guardarComentarios();
 			commentProcessService.guardarComentariosProcesados();
 			//matchFinalService.guardarResultadoFinal();
 			result = new ModelAndView("redirect:/");
@@ -133,8 +133,8 @@ public class WelcomeController extends AbstractController {
 		try {
 			//matchForecastService.guardarPartidos();
 			//commentService.guardarComentarios();
-			generateArchiveArff.generarArchivoWeka();
-
+			generateArchiveArff.generarArchivoWekaLos3MejoresComentarios();
+			generateArchiveArff.generarArchivoWekaComentarios();
 			//matchFinalService.guardarResultadoFinal();
 			result = new ModelAndView("redirect:/");
 		} catch (final Throwable th) {

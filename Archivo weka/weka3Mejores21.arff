@@ -1,0 +1,39 @@
+@RELATION PREDICCION 
+
+@ATTRIBUTE local {real-madrid,barcelona,sevilla,levante,deportivo-la-coruna,celta-vigo,leganes,valencia,villarreal,alaves,getafe,real-sociedad,malaga,girona,atletico-madrid,espanyol,las-palmas,eibar,athletic-bilbao,real-betis}
+@ATTRIBUTE visitante{real-madrid,barcelona,sevilla,levante,deportivo-la-coruna,leganes,celta-vigo,valencia,alaves,villarreal,getafe,real-sociedad,malaga,girona,atletico-madrid,espanyol,las-palmas,eibar,athletic-bilbao,real-betis}@ATTRIBUTE NN real 
+@ATTRIBUTE VB real 
+@ATTRIBUTE ADJ real 
+@ATTRIBUTE resultado {1,x,2} 
+
+@data 
+eibar,malaga,0.43975905,0.21686748,0.21686748,x
+eibar,malaga,0.36206895,0.22413793,0.18965517,x
+eibar,malaga,0.45454547,0.13636364,0.1590909,x
+alaves,leganes,0.3448276,0.18965517,0.22413793,x
+alaves,leganes,0.42857143,0.093877554,0.18367347,x
+alaves,leganes,0.34234235,0.25225225,0.12612613,x
+real-madrid,deportivo-la-coruna,0.48235294,0.25882354,0.11764706,1
+real-madrid,deportivo-la-coruna,0.43209878,0.20987654,0.19753087,1
+real-madrid,deportivo-la-coruna,0.3761062,0.22123894,0.17256637,1
+real-sociedad,villarreal,0.36231884,0.1884058,0.19323671,2
+real-sociedad,villarreal,0.3723404,0.15957446,0.15957446,2
+real-sociedad,villarreal,0.36175114,0.29493088,0.17281106,2
+real-betis,barcelona,0.47560975,0.15853658,0.20731707,2
+real-betis,barcelona,0.41216215,0.0945946,0.2027027,2
+real-betis,barcelona,0.47058824,0.27058825,0.11764706,2
+espanyol,sevilla,0.4640523,0.1633987,0.1764706,2
+espanyol,sevilla,0.43333334,0.15,0.2,2
+espanyol,sevilla,0.34,0.28,0.26,2
+atletico-madrid,girona,0.4,0.21666667,0.11666667,x
+atletico-madrid,girona,0.47663552,0.2897196,0.11214953,x
+atletico-madrid,girona,0.4017094,0.17094018,0.07692308,x
+villarreal,levante,0.3768116,0.2753623,0.1884058,1
+villarreal,levante,0.38709676,0.18817204,0.16129032,1
+villarreal,levante,0.359375,0.2890625,0.109375,1
+las-palmas,valencia,0.33566433,0.14685315,0.25174826,1
+las-palmas,valencia,0.3902439,0.34146342,0.07317073,1
+las-palmas,valencia,0.35436893,0.22815534,0.1407767,1
+getafe,athletic-bilbao,0.4893617,0.25531915,0.08510638,x
+getafe,athletic-bilbao,0.35185185,0.2777778,0.2037037,x
+getafe,athletic-bilbao,0.40966386,0.14495799,0.19957983,x

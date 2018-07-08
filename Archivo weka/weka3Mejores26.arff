@@ -1,0 +1,40 @@
+@RELATION PREDICCION 
+
+@ATTRIBUTE local {real-madrid,barcelona,sevilla,levante,deportivo-la-coruna,celta-vigo,leganes,valencia,villarreal,alaves,getafe,real-sociedad,malaga,girona,atletico-madrid,espanyol,las-palmas,eibar,athletic-bilbao,real-betis}
+@ATTRIBUTE visitante{real-madrid,barcelona,sevilla,levante,deportivo-la-coruna,leganes,celta-vigo,valencia,alaves,villarreal,getafe,real-sociedad,malaga,girona,atletico-madrid,espanyol,las-palmas,eibar,athletic-bilbao,real-betis} 
+@ATTRIBUTE NN real 
+@ATTRIBUTE VB real 
+@ATTRIBUTE ADJ real 
+@ATTRIBUTE resultado {1,x,2} 
+
+@data 
+real-betis,real,0.33962265,0.0990566,0.14150943,x
+real-betis,real,0.44680852,0.089361705,0.18723404,x
+real-betis,real,0.34545454,0.21818182,0.23636363,x
+las-palmas,barcelona,0.42528737,0.1954023,0.17816092,x
+las-palmas,barcelona,0.4642857,0.1904762,0.17857143,x
+las-palmas,barcelona,0.36363637,0.16363636,0.19090909,x
+alaves,levante,0.39252338,0.22429906,0.14018692,1
+alaves,levante,0.43589744,0.16666667,0.23076923,1
+alaves,levante,0.38857144,0.20571429,0.14857143,1
+getafe,deportivo-la-coruna,0.5185185,0.14814815,0.16666667,1
+getafe,deportivo-la-coruna,0.37962964,0.3425926,0.10185185,1
+getafe,deportivo-la-coruna,0.3561644,0.24657534,0.19178082,1
+malaga,sevilla,0.3888889,0.11111111,0.25,2
+malaga,sevilla,0.40963855,0.09638554,0.15662651,2
+malaga,sevilla,0.3,0.23333333,0.2,2
+athletic-bilbao,valencia,0.3970588,0.19117647,0.2647059,x
+athletic-bilbao,valencia,0.3655914,0.23655914,0.13978495,x
+athletic-bilbao,valencia,0.3548387,0.14516129,0.19354838,x
+eibar,villarreal,0.35526314,0.2236842,0.18421052,1
+eibar,villarreal,0.37815127,0.2857143,0.11764706,1
+eibar,villarreal,0.4144144,0.15615615,0.18018018,1
+atletico-madrid,leganes,0.3508772,0.19298245,0.20175439,1
+atletico-madrid,leganes,0.34920636,0.23809524,0.2857143,1
+atletico-madrid,leganes,0.3764706,0.24705882,0.16470589,1
+espanyol,real-madrid,0.5,0.19444445,0.19444445,1
+espanyol,real-madrid,0.41379312,0.18103448,0.12931034,1
+espanyol,real-madrid,0.37623763,0.26732674,0.15841584,1
+girona,celta-vigo,0.3736842,0.078947365,0.18947369,1
+girona,celta-vigo,0.39375,0.2875,0.16875,1
+girona,celta-vigo,0.35714287,0.19285715,0.20714286,1

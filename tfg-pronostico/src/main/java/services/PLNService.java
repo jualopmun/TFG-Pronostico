@@ -163,6 +163,7 @@ public class PLNService {
 			result += stemmed + " ";
 
 		}
+		System.out.println(result);
 		return result;
 	}
 
@@ -184,7 +185,7 @@ public class PLNService {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, TreeTaggerException {
 
-		postaggin("Entramos a la victoria simple del Valladolid en la ida del play- off de ascenso a primera división.Mis motivos para este pick son claros: - gran temporada del Valladolid como local, de 21 partidos en casa, ha ganado 14 con sólo ");
+		lematizar("Voy con este pronostico arriesgado pero con posibilidades de salir, en primer lugar decir que el actual entrenador del Sevilla cuando de enfrentaba a equipos de abajo con el Milan como visitante les gano a todos por dos goles o mas de diferencia. -Por otro lado voy analizar primero al Alaves que Abelardo parece haberle lavado un poco la imagen, hasta la llegada de este ultimo habia perdido todos sus partidos como local menos uno y cuando ha jugado contra alguno de los 7 primeros como local ha perdido por dos goles o mas a excepcion de Real Madrid y Valencia que solo fue por uno. Tiene las bajas de dos jugadores que estaban siendo importantes para Abelardo en distintas lineas como son Alexis y Burgui y eso lo puede notar especialmente en ataque. -El Sevilla era muy irregular fuera de casa con su anterior entrenador, pero a los rivales de la zona baja de la tabla les ha ganado a todos pero lo malo es que en la mayoria de ellos solo ha sido por un gol, viene de perder por 3-5 ante el Betis, que esos partidos son los que duelen por su rivalidad, por lo que tienen que salir ha ganar y por mas de un gol para poder reencontrarse con su aficion en el siguiente partido. Ambos han jugado copa del rey pero no creo que sea transcendente para este partido porque estaban ya practicamente clasificados de la ida. A mi parecer el Sevilla lleva equipo para ganarle por dos goles o mas, porque el equipo ha sido confeccionado para esta en Champions mientras su rival para no descender. ");
 
 	}
 

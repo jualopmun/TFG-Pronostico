@@ -1,0 +1,20 @@
+@RELATION PREDICCION 
+
+@ATTRIBUTE local {real-madrid,barcelona,sevilla,levante,deportivo-la-coruna,celta-vigo,leganes,valencia,villarreal,alaves,getafe,real-sociedad,malaga,girona,atletico-madrid,espanyol,las-palmas,eibar,athletic-bilbao,real-betis}
+@ATTRIBUTE visitante{real-madrid,barcelona,sevilla,levante,deportivo-la-coruna,leganes,celta-vigo,valencia,alaves,villarreal,getafe,real-sociedad,malaga,girona,atletico-madrid,espanyol,las-palmas,eibar,athletic-bilbao,real-betis} 
+@ATTRIBUTE NN real 
+@ATTRIBUTE VB real 
+@ATTRIBUTE ADJ real 
+@ATTRIBUTE resultado {1,x,2} 
+
+@data 
+getafe,celta-vigo,NaN,NaN,NaN,1
+real-sociedad,levante,0.41075918,0.19155355,0.15635999,1
+atletico-madrid,athletic-bilbao,0.425656,0.19533528,0.14431487,1
+espanyol,villarreal,0.39718688,0.19758874,0.16208975,x
+real-betis,real-madrid,0.38870057,0.17005649,0.14124294,2
+las-palmas,sevilla,0.3900415,0.21346243,0.16874136,2
+eibar,barcelona,0.4152489,0.21487083,0.16068053,2
+alaves,deportivo-la-coruna,0.36498517,0.18312845,0.14752014,1
+malaga,valencia,0.3924449,0.21668416,0.17366213,2
+girona,leganes,0.39212093,0.14933577,0.17453046,1

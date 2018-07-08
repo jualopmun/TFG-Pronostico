@@ -56,7 +56,7 @@
 	</bean>
 	
 	<bean id="jornada20" class="domain.Day">
-		<property name="num" value="28"></property>
+		<property name="num" value="29"></property>
 		<property name="matchesForecast">
 		<list></list>
 		</property>

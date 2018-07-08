@@ -81,8 +81,20 @@ public class CommentService {
 			for (User a : usersAux) {
 				usercomp.add(a.getName());
 			}
-			for (String foros : PruebaJsoup.listaDeForos(dayService.ultimaJornada().getNum())) {
+			List <String> lista= new ArrayList<String>();
+			lista.add("http://www.apuestasdeportivas.com/foro/pronosticos-de-futbol-espanol/espana-primera-division-leganes-vs-sevilla-18-de-marzo-2018");
+			lista.add("http://www.apuestasdeportivas.com/foro/pronosticos-de-futbol-espanol/espana-primera-division-barcelona-vs-athletic-bilbao-18-de-marzo-2018");
+			lista.add("http://www.apuestasdeportivas.com/foro/pronosticos-de-futbol-espanol/espana-primera-division-villarreal-vs-atletico-madrid-18-de-marzo-2018");
+			lista.add("http://www.apuestasdeportivas.com/foro/pronosticos-de-futbol-espanol/espana-primera-division-celta-vigo-vs-malaga-18-de-marzo-2018");
+			lista.add("http://www.apuestasdeportivas.com/foro/pronosticos-de-futbol-espanol/espana-primera-division-real-madrid-vs-girona-18-de-marzo-2018");
+			lista.add("http://www.apuestasdeportivas.com/foro/pronosticos-de-futbol-espanol/espana-primera-division-deportivo-la-coruna-vs-las-palmas-17-de-marzo-2018");
+			lista.add("http://www.apuestasdeportivas.com/foro/pronosticos-de-futbol-espanol/espana-primera-division-valencia-vs-alaves-17-de-marzo-2018");
+			lista.add("http://www.apuestasdeportivas.com/foro/pronosticos-de-futbol-espanol/espana-primera-division-real-sociedad-vs-getafe-17-de-marzo-2018");
+			lista.add("http://www.apuestasdeportivas.com/foro/pronosticos-de-futbol-espanol/espana-primera-division-real-betis-vs-espanyol-17-de-marzo-2018");
+			lista.add("http://www.apuestasdeportivas.com/foro/pronosticos-de-futbol-espanol/espana-primera-division-levante-vs-eibar-16-de-marzo-2018");
 
+			//for (String foros : PruebaJsoup.listaDeForos(dayService.ultimaJornada().getNum())) {
+			for (String foros : lista) {
 				Document d = Jsoup.connect(foros).timeout(600000).get();
 				Elements elem = d.select("div.parrafo");
 				Elements elem2 = d.select("div.nombre_usuario");

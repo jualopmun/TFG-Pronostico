@@ -1,0 +1,55 @@
+@relation PREDICCION
+
+@attribute local {real-madrid,barcelona,sevilla,levante,deportivo-la-coruna,celta-vigo,leganes,valencia,villarreal,alaves,getafe,real-sociedad,malaga,girona,atletico-madrid,espanyol,las-palmas,eibar,athletic-bilbao,real-betis}
+@attribute visitante {real-madrid,barcelona,sevilla,levante,deportivo-la-coruna,leganes,celta-vigo,valencia,alaves,villarreal,getafe,real-sociedad,malaga,girona,atletico-madrid,espanyol,las-palmas,eibar,athletic-bilbao,real-betis}
+@attribute NN numeric
+@attribute VB numeric
+@attribute ADJ numeric
+@attribute resultado {1,x,2}
+
+@data
+real-madrid,alaves,0.367257,0.225664,0.172566,1
+real-madrid,alaves,0.413265,0.19898,0.153061,1
+real-madrid,alaves,0.525,0.05,0.15,1
+athletic-bilbao,malaga,0.361905,0.314286,0.12381,1
+valencia,real-sociedad,0.466667,0.209524,0.219048,1
+valencia,real-sociedad,0.474138,0.198276,0.206897,1
+valencia,real-sociedad,0.384615,0.169231,0.153846,1
+villarreal,getafe,0.435644,0.267327,0.148515,1
+barcelona,girona,0.403509,0.263158,0.175439,x
+barcelona,girona,0.402778,0.1875,0.201389,x
+barcelona,girona,0.317568,0.141892,0.094595,x
+sevilla,atletico-madrid,0.43299,0.195876,0.14433,2
+sevilla,atletico-madrid,0.455285,0.252033,0.154472,2
+deportivo-la-coruna,espanyol,0.376238,0.29703,0.168317,1
+deportivo-la-coruna,espanyol,0.401961,0.156863,0.166667,1
+leganes,las-palmas,0.389937,0.157233,0.132075,1
+leganes,las-palmas,0.352941,0.279412,0.147059,1
+celta-vigo,eibar,0.362069,0.293103,0.172414,1
+celta-vigo,eibar,0.389937,0.213836,0.157233,1
+celta-vigo,eibar,0.393443,0.180328,0.196721,1
+deportivo-la-coruna,eibar,0.361702,0.255319,0.255319,1
+deportivo-la-coruna,eibar,0.461538,0.120879,0.10989,1
+deportivo-la-coruna,eibar,0.41853,0.166134,0.15655,1
+sevilla,athletic-bilbao,0.363636,0.25,0.227273,2
+real-madrid,getafe,0.453333,0.133333,0.213333,1
+real-madrid,getafe,0.34375,0.166667,0.197917,1
+real-madrid,getafe,0.371429,0.295238,0.152381,1
+barcelona,atletico-madrid,0.308219,0.178082,0.136986,x
+barcelona,atletico-madrid,0.359375,0.20625,0.1875,x
+barcelona,atletico-madrid,0.357143,0.132143,0.085714,x
+levante,espanyol,0.489583,0.208333,0.135417,1
+levante,espanyol,0.27,0.35,0.14,1
+levante,espanyol,0.395604,0.252747,0.087912,1
+villarreal,girona,0.4375,0.21875,0.1875,1
+villarreal,girona,0.367647,0.176471,0.220588,1
+villarreal,girona,0.361635,0.216981,0.194969,1
+valencia,real-betis,0.375,0.166667,0.104167,1
+valencia,real-betis,0.333333,0.137931,0.252874,1
+valencia,real-betis,0.330247,0.228395,0.166667,1
+leganes,malaga,0.367089,0.278481,0.126582,1
+leganes,malaga,0.30605,0.220641,0.177936,1
+leganes,malaga,0.391705,0.24424,0.152074,1
+celta-vigo,las-palmas,0.40708,0.19469,0.185841,1
+celta-vigo,las-palmas,0.403361,0.260504,0.109244,1
+celta-vigo,las-palmas,0.427481,0.259542,0.061069,1
