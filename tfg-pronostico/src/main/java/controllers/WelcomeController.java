@@ -133,8 +133,9 @@ public class WelcomeController extends AbstractController {
 		try {
 			//matchForecastService.guardarPartidos();
 			//commentService.guardarComentarios();
-			generateArchiveArff.generarArchivoWekaLos3MejoresComentarios();
-			generateArchiveArff.generarArchivoWekaComentarios();
+			//generateArchiveArff.generarArchivoWekaLos3MejoresComentarios();
+			//generateArchiveArff.generarArchivoWekaComentarios();
+			generateArchiveArff.generarArchivoWekaPalabrasImportante();
 			//matchFinalService.guardarResultadoFinal();
 			result = new ModelAndView("redirect:/");
 		} catch (final Throwable th) {

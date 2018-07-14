@@ -43,7 +43,7 @@ public class CommentProcessService {
 			String eliminar = eliminarStopWords(comentario);
 
 			String transformar = transformaPalabras(eliminar);
-			//String lematizar = PLNService.lematizar(transformar);
+		    //String lematizar = PLNService.lematizar(transformar);
 
 			if (!aux.contains(eliminar)) {
 				CommentProcess commentProcess = new CommentProcess();

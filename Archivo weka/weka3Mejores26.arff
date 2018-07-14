@@ -8,9 +8,9 @@
 @ATTRIBUTE resultado {1,x,2} 
 
 @data 
-real-betis,real,0.33962265,0.0990566,0.14150943,x
-real-betis,real,0.44680852,0.089361705,0.18723404,x
-real-betis,real,0.34545454,0.21818182,0.23636363,x
+real-betis,real-sociedad,0.33962265,0.0990566,0.14150943,x
+real-betis,real-sociedad,0.44680852,0.089361705,0.18723404,x
+real-betis,real-sociedad,0.34545454,0.21818182,0.23636363,x
 las-palmas,barcelona,0.42528737,0.1954023,0.17816092,x
 las-palmas,barcelona,0.4642857,0.1904762,0.17857143,x
 las-palmas,barcelona,0.36363637,0.16363636,0.19090909,x

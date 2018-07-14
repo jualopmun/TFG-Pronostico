@@ -29,19 +29,19 @@ public class WekService {
 	public static void algoritmoModelJ48() throws Exception {
 		
 		 BufferedReader reader = null;
-	      reader=new BufferedReader(new FileReader("C:\\Users\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Archivo weka\\wekaGeneralMejores3.arff"));
+	      reader=new BufferedReader(new FileReader("C:\\Users\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Archivo weka\\WekaPalabras\\wekapalabrasGeneral.arff"));
 	      Instances train =new Instances (reader);
-	      train.setClassIndex(0);     
+	      train.setClassIndex(11);     
 	      reader.close();
 
 	      J48 j48 = new J48();
 	      j48.buildClassifier(train);
 	      Evaluation eval = new Evaluation(train);
-	      eval.crossValidateModel(j48, train, 10 , new Random(1));
+	      eval.crossValidateModel(j48, train, 20 , new Random(1));
 
 	      System.out.println(eval.toSummaryString("\n Results \n=====\n",true));
 	      System.out.println(eval.fMeasure(1)+" "+eval.precision(1)+" "+eval.recall(1)+" ");    
-	      weka.core.SerializationHelper.write("C:\\Users\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Modelos\\j48Mejores3.model", j48);
+	      weka.core.SerializationHelper.write("C:\\Users\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Archivo weka\\WekaPalabras\\j48Palabras.model", j48);
 		
 	}
 	
@@ -49,9 +49,9 @@ public class WekService {
 	public static void algoritmoRandomForest() throws Exception {
 		
 		 BufferedReader reader = null;
-	      reader=new BufferedReader(new FileReader("C:\\Users\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Archivo weka\\wekaGeneralMejores3.arff"));
+	      reader=new BufferedReader(new FileReader("C:\\Users\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Archivo weka\\WekaPalabras\\wekapalabrasGeneral.arff"));
 	      Instances train =new Instances (reader);
-	      train.setClassIndex(5);     
+	      train.setClassIndex(11);     
 	      reader.close();
 
 	      RandomForest randomForest = new RandomForest();
@@ -63,7 +63,7 @@ public class WekService {
 
 	      System.out.println(eval.toSummaryString("\n Results \n=====\n",true));
 	      System.out.println(eval.fMeasure(1)+" "+eval.precision(1)+" "+eval.recall(1)+" ");    
-	      weka.core.SerializationHelper.write("C:\\Users\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Modelos\\randomForestMejores3.model", randomForest);
+	      weka.core.SerializationHelper.write("C:\\Users\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Archivo weka\\WekaPalabras\\randomForestPalabras.model", randomForest);
 		
 	}
 	
@@ -71,9 +71,9 @@ public class WekService {
 	public static void algoritmoSMO() throws Exception {
 		
 		 BufferedReader reader = null;
-	      reader=new BufferedReader(new FileReader("C:\\Users\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Archivo weka\\wekaGeneralMejores3.arff"));
+	      reader=new BufferedReader(new FileReader("C:\\Users\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Archivo weka\\WekaPalabras\\wekapalabrasGeneral.arff"));
 	      Instances train =new Instances (reader);
-	      train.setClassIndex(5);     
+	      train.setClassIndex(11);     
 	      reader.close();
 
 	      SMO smo = new SMO();
@@ -83,7 +83,7 @@ public class WekService {
 
 	      System.out.println(eval.toSummaryString("\n Results \n=====\n",true));
 	      System.out.println(eval.fMeasure(1)+" "+eval.precision(1)+" "+eval.recall(1)+" ");    
-	      weka.core.SerializationHelper.write("C:\\Users\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Modelos\\smo3Comment.model", smo);
+	      weka.core.SerializationHelper.write("C:\\Users\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Archivo weka\\WekaPalabras\\smoPalabras.model", smo);
 		
 	}
 	
@@ -92,14 +92,14 @@ public class WekService {
 				// load unlabeled data
 				 Instances unlabeled = new Instances(
 				                         new BufferedReader(
-				                           new FileReader("C:\\Users\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Modelos\\weka3Mejores29.arff")));
+				                           new FileReader("C:\\Users\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Archivo weka\\WekaPalabras\\wekapalabras29.arff")));
 				 
 				 // set class attribute
 				 unlabeled.setClassIndex(unlabeled.numAttributes()-1 );
 				 // create copy
 				 Instances labeled = new Instances(unlabeled);
 				 // label instances
-				 Classifier myCls = (Classifier) weka.core.SerializationHelper.read("C:\\Users\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Modelos\\smo3Comment.model");
+				 Classifier myCls = (Classifier) weka.core.SerializationHelper.read("C:\\Users\\\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Archivo weka\\WekaPalabras\\smoPalabras.model");
 				 for (int i = 0; i <unlabeled.numInstances(); i++) {
 					
 				   double clsLabel = myCls.classifyInstance(unlabeled.instance(i));
@@ -110,7 +110,7 @@ public class WekService {
 
 				 // save labeled data
 				 BufferedWriter writer = new BufferedWriter(
-				                           new FileWriter("C:\\Users\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Modelos\\resultado3CommentSMO.arff"));
+				                           new FileWriter("C:\\Users\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Archivo weka\\WekaPalabras\\wekapalabrasSMO.arff"));
 				 writer.write(labeled.toString());
 				 System.out.println(labeled.toString());
 				 writer.newLine();
@@ -128,6 +128,7 @@ public class WekService {
 		
 		algoritmoSMO();
 		resultadoFinal();
+		
 	}
 }
 
