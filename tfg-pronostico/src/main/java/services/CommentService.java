@@ -81,26 +81,18 @@ public class CommentService {
 			for (User a : usersAux) {
 				usercomp.add(a.getName());
 			}
-			List <String> lista= new ArrayList<String>();
-			lista.add("http://www.apuestasdeportivas.com/foro/pronosticos-de-futbol-espanol/espana-primera-division-leganes-vs-sevilla-18-de-marzo-2018");
-			lista.add("http://www.apuestasdeportivas.com/foro/pronosticos-de-futbol-espanol/espana-primera-division-barcelona-vs-athletic-bilbao-18-de-marzo-2018");
-			lista.add("http://www.apuestasdeportivas.com/foro/pronosticos-de-futbol-espanol/espana-primera-division-villarreal-vs-atletico-madrid-18-de-marzo-2018");
-			lista.add("http://www.apuestasdeportivas.com/foro/pronosticos-de-futbol-espanol/espana-primera-division-celta-vigo-vs-malaga-18-de-marzo-2018");
-			lista.add("http://www.apuestasdeportivas.com/foro/pronosticos-de-futbol-espanol/espana-primera-division-real-madrid-vs-girona-18-de-marzo-2018");
-			lista.add("http://www.apuestasdeportivas.com/foro/pronosticos-de-futbol-espanol/espana-primera-division-deportivo-la-coruna-vs-las-palmas-17-de-marzo-2018");
-			lista.add("http://www.apuestasdeportivas.com/foro/pronosticos-de-futbol-espanol/espana-primera-division-valencia-vs-alaves-17-de-marzo-2018");
-			lista.add("http://www.apuestasdeportivas.com/foro/pronosticos-de-futbol-espanol/espana-primera-division-real-sociedad-vs-getafe-17-de-marzo-2018");
-			lista.add("http://www.apuestasdeportivas.com/foro/pronosticos-de-futbol-espanol/espana-primera-division-real-betis-vs-espanyol-17-de-marzo-2018");
-			lista.add("http://www.apuestasdeportivas.com/foro/pronosticos-de-futbol-espanol/espana-primera-division-levante-vs-eibar-16-de-marzo-2018");
-
-			//for (String foros : PruebaJsoup.listaDeForos(dayService.ultimaJornada().getNum())) {
-			for (String foros : lista) {
+			//Crear el metodo de la lista de foros
+			//Extraemos la lista de todos los foros recogido en el metodo listaDeForos
+			for (String foros : PruebaJsoup.listaDeForos(dayService.ultimaJornada().getNum())) {
+			
 				Document d = Jsoup.connect(foros).timeout(600000).get();
+				//Aputamos al comentario
 				Elements elem = d.select("div.parrafo");
+				//Apuntamos al usuario del comentario
 				Elements elem2 = d.select("div.nombre_usuario");
 				partido++;
 				for (int i = 0; i < elem.size(); i++) {
-
+					//Filtramos solamente el nombre del usuario
 					String usuario = elem2.get(i).text().replaceAll("Un pronóstico de: ", "");
 					String usuarioFinal = usuario.replaceAll("Estadísticas del pronosticador Añadir pronosticador a favoritos", "");
 					String comentario = elem.get(i).text();
@@ -114,11 +106,12 @@ public class CommentService {
 								break;
 							}
 						}
-
+						//Empezamos a guardar los comentarios y el usuario
 						user.setComments(new ArrayList<Comment>());
 						Comment comment = new Comment();
-
+						//Apuntamos a la pagína del usuario 
 						Document j = Jsoup.connect("http://www.apuestasdeportivas.com/tipster/" + usuarioFinal).timeout(600000).get();
+						//Apuntamos a su estadistica de porcentaje de acierto para ser guardado
 						Elements elem3 = j.select("span.cell_02.impar_amarillo_B.bold");
 
 						String convertir = elem3.get(0).text().replaceAll(" %", "");
@@ -129,17 +122,14 @@ public class CommentService {
 						comment.setComment(comentario);
 						comment.setUser(user);
 						user.getComments().add(comment);
-						//comment.setUser(user);
-						//commentRepository.save(comment);
-
+						
 						matches.get(partido).getComments().add(comment);
 						matches.get(partido).setActualization(new Date());
 						matchForecastService.save(matches.get(partido));
 						commentcomp.add(comentario);
 						usersAux.add(user);
 					}
-					//user.setComments(comments);
-					//userService.save(user);
+					
 
 				}
 

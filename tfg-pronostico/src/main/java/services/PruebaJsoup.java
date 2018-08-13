@@ -19,14 +19,18 @@ public class PruebaJsoup {
 		List<String> foros = new ArrayList<String>();
 
 		Integer pagina = 0;
+		//Entramos en la pagina de foros de la liga
 		String lista = "http://www.apuestasdeportivas.com/foro/pronosticos-de-futbol-espanol/";
 
 		try {
-
+			
+			//Buscaremos los hilos de los partidos que hemos capturado en el método getJornadas
 			while (pagina < 120) {
 				Document d = Jsoup.connect(lista).timeout(600000).get();
+				//Apuntaremos donde se encuentra el link del hilo
 				Elements elem = d.select("td.lastpost.windowbg2");
-
+				
+				//Guardaremos el link en la lista de foros. Comprobaremos si no está guardado el link o el partido
 				for (Element e : elem) {
 					for (String partidos : getJornadas(num)) {
 						String pag = e.select("a[href]").attr("href");
@@ -143,15 +147,17 @@ public class PruebaJsoup {
 
 	public static List<String> getJornadas(int num) {
 		List<String> jornadas = new ArrayList<String>();
-		List<String> partidos = new ArrayList<String>();
-		List<String> fecha = new ArrayList<String>();
 		List<String> result = new ArrayList<String>();
 		try {
+			//Nos conectamos a la página donde viene recogida la jornada y los partidos de esa jornada
 			Document d = Jsoup.connect("http://www.marcadoresonline.com/futbol/españa/primeradivision/jornada" + num).timeout(600000).get();
-
+			
+			//Apuntamos a los nombres de los equipos (Durante la jornada, esta clasificado partido pendiente, partido finalizado y partido en juego)
 			Elements elem = d.select("div.contPartido.pdt_pend");
 			Elements elem2 = d.select("div.contPartido.pdt_fin");
 			Elements elem3 = d.select("div.contPartido.pdt_enjuego");
+			
+			//Capturamos los nombres de los equipos de los partidos
 			for (Element e : elem) {
 
 				jornadas.add(e.select("a[href]").text());
@@ -167,7 +173,8 @@ public class PruebaJsoup {
 				jornadas.add(e.select("a[href]").text());
 
 			}
-
+			
+			//Parcheamos los nombres para que todos se llamen un nombre 
 			for (String f : jornadas) {
 				f = f.toLowerCase();
 				if (f.contains("athletic bilbao")) {
@@ -203,10 +210,17 @@ public class PruebaJsoup {
 				if (f.contains("betis")) {
 					f = f.replaceAll("betis", "real-betis");
 				}
+				if (f.contains("real sociedad")) {
+					f = f.replaceAll("real sociedad", "real-sociedad");
+				}
+				if (f.contains("rayo vallecano")) {
+					f = f.replaceAll("rayo vallecano", "rayo-vallecano");
+				}
 				f = f.replaceAll(" ", "-vs-");
 				result.add(f);
 
 			}
+			
 
 		} catch (
 
@@ -262,12 +276,10 @@ public class PruebaJsoup {
 		// TODO Auto-generated method stub
 		int num = 19;
 		System.out.println("------------------jornada: " + num + "------------");
-		//getComentarios(listaDeForos(num));
-		//getComentarios(listaDeForos(num));
-		//getUsuarios(getComentarios(listaDeForos(num)));
-		//getResultados(num);
-		//listaDeForos(num);
-		getResultados(num);
+		
+		for(String a: getJornadas(num)) {
+			System.out.println(a + "\n");
+		}
 
 	}
 

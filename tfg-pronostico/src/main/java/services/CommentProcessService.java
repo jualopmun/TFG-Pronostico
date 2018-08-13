@@ -45,7 +45,7 @@ public class CommentProcessService {
 			String transformar = transformaPalabras(eliminar);
 		    //String lematizar = PLNService.lematizar(transformar);
 
-			if (!aux.contains(eliminar)) {
+			if (!aux.contains(transformar)) {
 				CommentProcess commentProcess = new CommentProcess();
 
 				commentProcess.setCommentProcess(transformar);

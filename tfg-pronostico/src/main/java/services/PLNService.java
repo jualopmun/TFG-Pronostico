@@ -54,26 +54,27 @@ public class PLNService {
 		return result;
 
 	}
-
-	public static String transformaPalabras(String comentario) throws FileNotFoundException, IOException {
+	public String transformaPalabras(String comentario) throws FileNotFoundException, IOException {
+		//Leemos el archivo donde esta loacalizado la lista de palabras de apodos de equipos de fútbol
 		String archivo = "ApodosEquiposFutbol.txt";
 		InputStream file = Thread.currentThread().getContextClassLoader().getResourceAsStream(archivo);
 		int numeroLineas = 10000;
 		byte chars[] = new byte[numeroLineas];
 		file.read(chars);
 		String palabra = "";
-		String result = "";
+
 		for (int i = 0; i < numeroLineas; i++) {
 
 			palabra += (char) chars[i];
 
 		}
-
+		//Transformamos las palabras de los comentarios en minuscula
 		String[] separar = palabra.split("\r\n");
 		comentario = comentario.toLowerCase();
+		//Eliminamos los caracteres especiales por ejemplo las tildes
 		comentario = remove1(comentario);
-		//String[] separarPalabras = comentario.split("\\W+");
-
+		
+		//Comparamos el comentario por uno a uno las palabras  y lo sustituimos por el nombre del equipo
 		for (String b : separar) {
 			String[] separacionFinal = b.split("->");
 
@@ -85,32 +86,35 @@ public class PLNService {
 			}
 		}
 
-		return result;
+		return comentario;
 	}
 
 	//Nos interesa realizar una lista de contadores para procesarlo
 	//lista[Nombres,Verbos,Adjetivos]
 	public static List<Float> postaggin(String comentario) {
-
+		
+		//Usaremos la libreria de Stanford para abrir el idioma español y las anotaciones necesarias
 		Properties props = new Properties();
 		props.put("annotators", "tokenize, ssplit, pos, lemma, ner");
 		props.setProperty("tokenize.language", "es");
 		props.setProperty("pos.model", "edu/stanford/nlp/models/pos-tagger/spanish/spanish-distsim.tagger");
-		//props.setProperty("parse.model", "edu/stanford/nlp/models/lexparser/spanishPCFG.ser.gz");
 		List<Float> res = new ArrayList<Float>();
+		//Estos contadores nos servira luego para generar los datasets
 		float NN = 0;
 		float VB = 0;
 		float ADJ = 0;
 		float contPal = 0;
+		//Invocamos la libreria de Stanford
 		StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
+		//Invocamos las anotaciones
 		Annotation document = new Annotation(comentario);
-
+		
 		pipeline.annotate(document);
 		List<CoreMap> sentences = document.get(SentencesAnnotation.class);
+		//Leemos una por una las palabras del comentario. solo nos interesa si es un NN,VB o ADJ
 		for (CoreMap sentence : sentences) {
 			for (CoreLabel token : sentence.get(TokensAnnotation.class)) {
 				String pos = token.get(PartOfSpeechAnnotation.class);
-				String word = token.get(TextAnnotation.class);
 				if (pos.contains("nc") || pos.contains("np0")) {
 					NN++;
 				}
@@ -129,8 +133,7 @@ public class PLNService {
 		float fNN=(float) (NN/contPal);
 		float fVB=(float) (VB/contPal);
 		float fADJ=(float) (ADJ/contPal);
-		System.out.println(ADJ);
-		System.out.println(fNN);
+		//Devolvemos los contadores
 		res.add(fNN);
 		res.add(fVB);
 		res.add(fADJ);
@@ -151,11 +154,12 @@ public class PLNService {
 	}
 
 	public static String lematizar(String palabra) {
-
+		//Invocamos la libreria snowball
 		SpanishStemmer spanish = new SpanishStemmer();
 
 		String[] tokens = palabra.split(" ");
 		String result = "";
+		//Comparamos palabras por palabras del comentario y lematizamos
 		for (String string : tokens) {
 			spanish.setCurrent(string);
 			spanish.stem();
@@ -163,7 +167,6 @@ public class PLNService {
 			result += stemmed + " ";
 
 		}
-		System.out.println(result);
 		return result;
 	}
 
@@ -184,9 +187,8 @@ public class PLNService {
 	//Probando algoritmo para sacar las palabras comunes en los comentarios
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, TreeTaggerException {
-
-		lematizar("tridente");
-
+		
+		System.out.println(lematizar("partido de entre el espanol y el athletic club. el athletic viene de hacer buenos partidos desde que fue eliminado en copa. por eso me decanto por esta apuesta,aunque creo que puede ganar,el campo del espanol no es un buen escenario para el athletic que lleva sin ganar 20 anos en liga.por eso nos cubrimos con el x2 por que el espanol anda flojillo ultimamente puede dar un susto y terminar el partido en empate suerte a todos"));
 	}
 
 }

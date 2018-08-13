@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.Random;
+import java.util.Scanner;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
@@ -22,113 +23,139 @@ import weka.core.Instance;
 import weka.core.Instances;
 
 public class WekService {
-	
-	//Codigo encontrado en el enlace: https://stackoverflow.com/questions/33556543/how-to-save-model-and-apply-it-on-a-test-dataset-on-java
-	
-	//Algoritmo J48
+
+	// Codigo encontrado en el enlace:
+	// https://stackoverflow.com/questions/33556543/how-to-save-model-and-apply-it-on-a-test-dataset-on-java
+
+	// Algoritmo J48
 	public static void algoritmoModelJ48() throws Exception {
+		//Preparamos las rutas para importar el dataset y exportar el modelo general
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Introduzca la ruta de la entrada del archivo arff: ");
+		String entrada = sc.nextLine();
+		Scanner sc2 = new Scanner(System.in);
+		System.out.println("Introduzca la ruta de la salida para el modelo: ");
+		String salida = sc2.nextLine();
+		BufferedReader reader = null;
+		reader = new BufferedReader(new FileReader(entrada));
+		Instances train = new Instances(reader);
+		train.setClassIndex(train.numAttributes() - 1);
+		reader.close();
 		
-		 BufferedReader reader = null;
-	      reader=new BufferedReader(new FileReader("C:\\Users\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Archivo weka\\WekaPalabras\\wekapalabrasGeneral.arff"));
-	      Instances train =new Instances (reader);
-	      train.setClassIndex(11);     
-	      reader.close();
-
-	      J48 j48 = new J48();
-	      j48.buildClassifier(train);
-	      Evaluation eval = new Evaluation(train);
-	      eval.crossValidateModel(j48, train, 20 , new Random(1));
-
-	      System.out.println(eval.toSummaryString("\n Results \n=====\n",true));
-	      System.out.println(eval.fMeasure(1)+" "+eval.precision(1)+" "+eval.recall(1)+" ");    
-	      weka.core.SerializationHelper.write("C:\\Users\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Archivo weka\\WekaPalabras\\j48Palabras.model", j48);
+		//Invocamos que algoritmo sera invocado
+		J48 j48 = new J48();
+		//Clasificamos el dataset
+		j48.buildClassifier(train);
+		Evaluation eval = new Evaluation(train);
+		eval.crossValidateModel(j48, train, 20, new Random(1));
 		
+		//Veremos aqui el resultado de cuantos ha sido clasificado y generaremos el .model para ser luego utilizado
+		System.out.println(eval.toSummaryString("\n Results \n=====\n", true));
+		System.out.println(eval.fMeasure(1) + " " + eval.precision(1) + " " + eval.recall(1) + " ");
+		weka.core.SerializationHelper.write(salida + "\\" + "j48.model", j48);
+
 	}
-	
-	//Algoritmo Randomforest
+
+	// Algoritmo Randomforest
 	public static void algoritmoRandomForest() throws Exception {
-		
-		 BufferedReader reader = null;
-	      reader=new BufferedReader(new FileReader("C:\\Users\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Archivo weka\\WekaPalabras\\wekapalabrasGeneral.arff"));
-	      Instances train =new Instances (reader);
-	      train.setClassIndex(11);     
-	      reader.close();
+		//Preparamos las rutas para importar el dataset y exportar el modelo general
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Introduzca la ruta de la entrada del archivo arff: ");
+		String entrada= sc.nextLine();
+		Scanner sc2 = new Scanner(System.in);
+		System.out.println("Introduzca la ruta de la salida para el modelo: ");
+		String salida = sc2.nextLine();
+		BufferedReader reader = null;
+		reader = new BufferedReader(new FileReader(entrada));
+		Instances train = new Instances(reader);
+		train.setClassIndex(train.numAttributes() - 1);
+		reader.close();
+		//Invocamos que algoritmo sera invocado
+		RandomForest randomForest = new RandomForest();
+		//Clasificamos el dataset
+		randomForest.buildClassifier(train);
+		Evaluation eval = new Evaluation(train);
 
-	      RandomForest randomForest = new RandomForest();
-	      
-	      randomForest.buildClassifier(train);
-	      Evaluation eval = new Evaluation(train);
-	      
-	      eval.crossValidateModel(randomForest, train, 10 , new Random(1));
+		eval.crossValidateModel(randomForest, train, 20, new Random(1));
+		//Veremos aqui el resultado de cuantos ha sido clasificado y generaremos el .model para ser luego utilizado
+		System.out.println(eval.toSummaryString("\n Results \n=====\n", true));
+		System.out.println(eval.fMeasure(1) + " " + eval.precision(1) + " " + eval.recall(1) + " ");
+		weka.core.SerializationHelper.write(salida + "\\" + "randomForest.model", randomForest);
 
-	      System.out.println(eval.toSummaryString("\n Results \n=====\n",true));
-	      System.out.println(eval.fMeasure(1)+" "+eval.precision(1)+" "+eval.recall(1)+" ");    
-	      weka.core.SerializationHelper.write("C:\\Users\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Archivo weka\\WekaPalabras\\randomForestPalabras.model", randomForest);
-		
 	}
-	
-	//Algoritmo SMO
+
+	// Algoritmo SMO
 	public static void algoritmoSMO() throws Exception {
-		
-		 BufferedReader reader = null;
-	      reader=new BufferedReader(new FileReader("C:\\Users\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Archivo weka\\WekaPalabras\\wekapalabrasGeneral.arff"));
-	      Instances train =new Instances (reader);
-	      train.setClassIndex(11);     
-	      reader.close();
+		//Preparamos las rutas para importar el dataset y exportar el modelo general
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Introduzca la ruta de la entrada del archivo arff: ");
+		String entrada= sc.nextLine();
+		Scanner sc2 = new Scanner(System.in);
+		System.out.println("Introduzca la ruta de la salida para el modelo: ");
+		String salida = sc2.nextLine();
+		BufferedReader reader = null;
+		reader = new BufferedReader(new FileReader(entrada));
+		Instances train = new Instances(reader);
+		train.setClassIndex(train.numAttributes() - 1);
+		reader.close();
+		//Invocamos que algoritmo sera invocado
+		SMO smo = new SMO();
+		smo.buildClassifier(train);
+		//Clasificamos el dataset
+		Evaluation eval = new Evaluation(train);
+		//Veremos aqui el resultado de cuantos ha sido clasificado y generaremos el .model para ser luego utilizado
+		eval.crossValidateModel(smo, train, 20, new Random(1));
 
-	      SMO smo = new SMO();
-	      smo.buildClassifier(train);
-	      Evaluation eval = new Evaluation(train);
-	      eval.crossValidateModel(smo, train, 10 , new Random(1));
+		System.out.println(eval.toSummaryString("\n Results \n=====\n", true));
+		System.out.println(eval.fMeasure(1) + " " + eval.precision(1) + " " + eval.recall(1) + " ");
+		weka.core.SerializationHelper.write(salida + "\\" + "smo.model", smo);
 
-	      System.out.println(eval.toSummaryString("\n Results \n=====\n",true));
-	      System.out.println(eval.fMeasure(1)+" "+eval.precision(1)+" "+eval.recall(1)+" ");    
-	      weka.core.SerializationHelper.write("C:\\Users\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Archivo weka\\WekaPalabras\\smoPalabras.model", smo);
-		
 	}
-	
-	public static void resultadoFinal() throws Exception {
-		
-				// load unlabeled data
-				 Instances unlabeled = new Instances(
-				                         new BufferedReader(
-				                           new FileReader("C:\\Users\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Archivo weka\\WekaPalabras\\wekapalabras29.arff")));
-				 
-				 // set class attribute
-				 unlabeled.setClassIndex(unlabeled.numAttributes()-1 );
-				 // create copy
-				 Instances labeled = new Instances(unlabeled);
-				 // label instances
-				 Classifier myCls = (Classifier) weka.core.SerializationHelper.read("C:\\Users\\\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Archivo weka\\WekaPalabras\\smoPalabras.model");
-				 for (int i = 0; i <unlabeled.numInstances(); i++) {
-					
-				   double clsLabel = myCls.classifyInstance(unlabeled.instance(i));
-				  
-				   labeled.instance(i).setClassValue(clsLabel);
-				   
-				 }
 
-				 // save labeled data
-				 BufferedWriter writer = new BufferedWriter(
-				                           new FileWriter("C:\\Users\\karli\\Desktop\\Informatica\\TFG\\Repositorio\\TFG-Pronostico\\Archivo weka\\WekaPalabras\\wekapalabrasSMO.arff"));
-				 writer.write(labeled.toString());
-				 System.out.println(labeled.toString());
-				 writer.newLine();
-				 writer.flush();
-				 writer.close();
-			}
-		
-	
-	
-	//Algoritmo para clasificar resultado final
-	
-	
+	public static void resultadoFinal() throws Exception {
+		//Preparamos las rutas para importar el dataset, el modelo y exportar el resultado final
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Introduzca la ruta de la entrada del archivo arff: ");
+		String entrada= sc.nextLine();
+		Scanner sc2 = new Scanner(System.in);
+		System.out.println("Introduzca la ruta de la entrada del modelo: ");
+		String entrada2 = sc2.nextLine();
+		Scanner sc3 = new Scanner(System.in);
+		System.out.println("Introduzca la ruta de la salida del resultado final: ");
+		String salida = sc3.nextLine();
+
+		// Cargamos el dataset
+		Instances unlabeled = new Instances(new BufferedReader(new FileReader(entrada)));
+
+		// Apuntamos a que etiqueta queremos clasificar
+		unlabeled.setClassIndex(unlabeled.numAttributes() - 1);
+		// Creamos una copia
+		Instances labeled = new Instances(unlabeled);
+		// Instaciamos la etiqueta del modelo y clasificamos el resultado final
+		Classifier myCls = (Classifier) weka.core.SerializationHelper.read(entrada2);
+		for (int i = 0; i < unlabeled.numInstances(); i++) {
+
+			double clsLabel = myCls.classifyInstance(unlabeled.instance(i));
+
+			labeled.instance(i).setClassValue(clsLabel);
+
+		}
+
+		// Guardamos el resultado final
+		BufferedWriter writer = new BufferedWriter(new FileWriter(salida + "\\"+"resultadoFinal.arff"));
+		writer.write(labeled.toString());
+		System.out.println(labeled.toString());
+		writer.newLine();
+		writer.flush();
+		writer.close();
+	}
+
+	// Algoritmo para clasificar resultado final
+
 	public static void main(String[] args) throws Exception {
-		
-		
-		algoritmoSMO();
+		//algoritmoModelJ48();
 		resultadoFinal();
 		
+
 	}
 }
-

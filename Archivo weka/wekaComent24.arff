@@ -8,7 +8,7 @@
 @ATTRIBUTE resultado {1,x,2} 
 
 @data 
-getafe,celta-vigo,NaN,NaN,NaN,1
+getafe,celta-vigo,0.0,0.0,0.0,1
 real-sociedad,levante,0.41075918,0.19155355,0.15635999,1
 atletico-madrid,athletic-bilbao,0.425656,0.19533528,0.14431487,1
 espanyol,villarreal,0.39718688,0.19758874,0.16208975,x

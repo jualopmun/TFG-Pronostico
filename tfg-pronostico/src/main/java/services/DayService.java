@@ -44,7 +44,7 @@ public class DayService {
 
 	//Metodos de ayuda
 	public Day ultimaJornada() {
-		return dayRepository.ultimaJornada().get(0);
+		return dayRepository.findAll().iterator().next();
 	}
 
 	public boolean existePartido() {
