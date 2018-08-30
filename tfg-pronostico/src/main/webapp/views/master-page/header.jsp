@@ -32,13 +32,9 @@
 									
 						<li><a class="fNiv" href="comment/list.do"><spring:message
 									code="master.page.comment" /></a></li>
-						<li class="dropdown">
-				          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><spring:message code="master.page.signup" /><span class="caret"></span></a>
-				          <ul class="dropdown-menu">
-				          	<li><a href="user/signup.do"><spring:message code="master.page.user.signup" /> </a></li>
-							<li><a href="mana/signup.do"><spring:message code="master.page.manager.signup" /> </a></li>
-				          </ul>
-				        </li>
+						<li><a class="fNiv" href="welcome/index.do"><spring:message
+									code="master.page.index" /></a></li>
+						
 				        
 
 						
@@ -51,11 +47,16 @@
 							aria-expanded="false"><security:authentication
 									property="principal.username" /><span class="caret"></span></a>
 							<ul class="dropdown-menu">
+							
 								
 								<li><a href="j_spring_security_logout"><spring:message
 											code="master.page.logout" /> </a></li>
 											
 							</ul>
+							<li><a class="fNiv" href="comment/list.do"><spring:message
+									code="master.page.comment" /></a></li>
+							<li><a class="fNiv" href="welcome/index.do"><spring:message
+									code="master.page.index" /></a></li>
 											
 											
 					</security:authorize>

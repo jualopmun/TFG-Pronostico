@@ -80,11 +80,11 @@
 </display:table>
 
 
-
+<security:authorize access="hasRole('ADMIN')">
 
 <input onclick="window.location='welcome/cargar.do'" class="btn btn-warning" type="button" name="save" value="${actorSaveHeader}"/> 
 <input onclick="window.location='welcome/procesar.do'" class="btn btn-warning" type="button" name="Generar archivo Weka" value="${generar}"/>
-
+</security:authorize>
 <p><spring:message code="welcome.greeting.current.time" /> ${moment}</p> 
 
 

@@ -18,7 +18,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Actor;
@@ -36,21 +35,22 @@ import services.MatchForecastService;
 public class WelcomeController extends AbstractController {
 
 	@Autowired
-	private LoginService loginService;
+	private LoginService			loginService;
 	@Autowired
-	private MatchForecastService matchForecastService;
+	private MatchForecastService	matchForecastService;
 	@Autowired
-	private CommentService commentService;
+	private CommentService			commentService;
 	@Autowired
-	private DayService dayService;
+	private DayService				dayService;
 	@Autowired
-	private MatchFinalService matchFinalService;
+	private MatchFinalService		matchFinalService;
 	@Autowired
-	private CommentProcessService commentProcessService;
+	private CommentProcessService	commentProcessService;
 	@Autowired
-	private GenerateArchiveArff generateArchiveArff;
+	private GenerateArchiveArff		generateArchiveArff;
 	@Autowired
-	private AnalisisService analisisService;
+	private AnalisisService			analisisService;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -77,10 +77,9 @@ public class WelcomeController extends AbstractController {
 			result.addObject("name", name);
 
 		result.addObject("moment", moment);
-		// result.addObject("matchForecast",
-		// dayService.ultimaJornada().getMatchesForecast());
-		// result.addObject("matchFinal", dayService.ultimaJornada().getMatchesFinal());
-		// result.addObject("num", dayService.ultimaJornada().getNum());
+		result.addObject("matchForecast", dayService.ultimaJornada().getMatchesForecast());
+		result.addObject("matchFinal", dayService.ultimaJornada().getMatchesFinal());
+		result.addObject("num", dayService.ultimaJornada().getNum());
 
 		return result;
 	}
@@ -117,10 +116,10 @@ public class WelcomeController extends AbstractController {
 		ModelAndView result = new ModelAndView("welcome/index");
 
 		try {
-			// matchForecastService.guardarPartidos();
-			// commentService.guardarComentarios();
+			matchForecastService.guardarPartidos();
+			commentService.guardarComentarios();
 			commentProcessService.guardarComentariosProcesados();
-			// matchFinalService.guardarResultadoFinal();
+			matchFinalService.guardarResultadoFinal();
 			result = new ModelAndView("redirect:/");
 		} catch (final Throwable th) {
 			th.printStackTrace();
@@ -153,7 +152,6 @@ public class WelcomeController extends AbstractController {
 
 		try {
 
-			
 			generateArchiveArff.generarArchivoWekaComentarios(ruta);
 			generateArchiveArff.generarArchivoWekaLos3MejoresComentarios(ruta);
 			generateArchiveArff.generarArchivoWekaPalabrasImportante(ruta);
@@ -163,7 +161,7 @@ public class WelcomeController extends AbstractController {
 		} catch (final Throwable th) {
 			th.printStackTrace();
 			result = new ModelAndView("welcome/procesar");
-			
+
 			result.addObject("message", "route.error");
 
 		}
